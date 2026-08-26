@@ -91,7 +91,14 @@ export function Nav() {
           open ? "translate-x-0" : "translate-x-full pointer-events-none"
         }`}
       >
-        <div className="flex items-center justify-between px-6 py-5">
+        {/* flame and gold are both lighter than they look (high luminance
+            despite reading as bold/saturated), so white text laid straight
+            on the gradient fails contrast — this scrim darkens the whole
+            panel by a flat amount so header text and every link clear WCAG
+            AA regardless of where they sit in the gradient. */}
+        <div className="absolute inset-0 bg-ink/55 pointer-events-none" />
+
+        <div className="relative flex items-center justify-between px-6 py-5">
           <span className="flex items-center gap-2.5">
             <LogoMark className="w-7 h-7 shrink-0" outer="text-white" inner="text-white/55" />
             <span className="font-display text-xl text-white">Jesus House</span>
@@ -114,7 +121,7 @@ export function Nav() {
           </button>
         </div>
 
-        <nav className="flex flex-col gap-2 px-6 py-2">
+        <nav className="relative flex flex-col gap-2 px-6 py-2">
           {LINKS.map((link, i) => (
             <div
               key={link.href}

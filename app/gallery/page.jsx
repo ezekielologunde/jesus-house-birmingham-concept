@@ -15,12 +15,12 @@ const TILES = [
 ];
 
 const GRADIENTS = [
+  "from-flame to-royal",
+  "from-gold to-flame",
   "from-royal to-midnight",
-  "from-midnight to-royal",
-  "from-ink to-midnight",
-  "from-midnight to-ink",
+  "from-flame to-midnight",
+  "from-gold to-royal",
   "from-royal to-ink",
-  "from-ink to-royal",
 ];
 
 export default function Gallery() {
@@ -38,10 +38,19 @@ export default function Gallery() {
         {TILES.map((tile, i) => (
           <Parallax key={tile.id} speed={i % 2 === 0 ? 0.15 : -0.15}>
             <Reveal delay={i * 60}>
-              <div
-                className={`aspect-square rounded-lg bg-gradient-to-br ${GRADIENTS[i % GRADIENTS.length]} shadow-card hover:shadow-card-hover transition-shadow duration-300 flex items-end p-4`}
-              >
-                <p className="font-body text-ivory text-sm font-semibold">{tile.caption}</p>
+              <div className="relative aspect-square rounded-lg overflow-hidden shadow-card hover:shadow-card-hover transition-shadow duration-300">
+                <div
+                  className={`absolute inset-0 bg-gradient-to-br ${GRADIENTS[i % GRADIENTS.length]}`}
+                />
+                {/* flame/gold are much lighter than they look (high luminance
+                    for their apparent boldness), so a caption sitting
+                    directly on them can fail contrast — this bottom-fade
+                    scrim guarantees a dark-enough patch under the text
+                    regardless of which gradient a tile gets. */}
+                <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/0 to-transparent" />
+                <p className="relative h-full flex items-end p-4 font-body text-ivory text-sm font-semibold">
+                  {tile.caption}
+                </p>
               </div>
             </Reveal>
           </Parallax>
