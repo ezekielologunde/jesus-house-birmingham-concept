@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Magnetic } from "@/components/ui/Magnetic";
+import { LogoMark } from "@/components/ui/LogoMark";
 import { routes, primaryNavPaths } from "@/lib/content/routes";
 
 const LINKS = primaryNavPaths
@@ -35,11 +36,14 @@ export function Nav() {
     <>
       <header className="fixed top-0 left-0 right-0 z-40 bg-ivory/90 backdrop-blur border-b border-ink/10">
         <div className="mx-auto max-w-6xl flex items-center justify-between px-6 py-4">
-          <Link href="/" className="flex flex-col leading-none">
-            <span className="font-body text-[0.55rem] leading-tight tracking-[0.04em] text-royal uppercase mb-0.5 max-w-[9.5rem]">
-              Redeemed Christian Church of God
+          <Link href="/" className="flex items-center gap-2.5">
+            <LogoMark className="w-8 h-8 shrink-0" />
+            <span className="flex flex-col leading-none">
+              <span className="font-body text-[0.55rem] leading-tight tracking-[0.04em] text-royal uppercase mb-0.5 max-w-[9.5rem]">
+                Redeemed Christian Church of God
+              </span>
+              <span className="font-display text-xl text-royal">Jesus House</span>
             </span>
-            <span className="font-display text-xl text-royal">Jesus House</span>
           </Link>
 
           <nav className="hidden md:flex items-center gap-6">
@@ -88,7 +92,10 @@ export function Nav() {
         }`}
       >
         <div className="flex items-center justify-between px-6 py-5">
-          <span className="font-display text-xl text-white">Jesus House</span>
+          <span className="flex items-center gap-2.5">
+            <LogoMark className="w-7 h-7 shrink-0" outer="text-white" inner="text-white/55" />
+            <span className="font-display text-xl text-white">Jesus House</span>
+          </span>
           <button
             type="button"
             onClick={() => setOpen(false)}

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { siteInfo } from "@/lib/content/siteInfo";
+import { LogoMark } from "@/components/ui/LogoMark";
 import { routes, secondaryNavPaths } from "@/lib/content/routes";
 
 const MORE_LINKS = secondaryNavPaths
@@ -11,6 +12,7 @@ export function Footer() {
     <footer className="bg-midnight text-ivory">
       <div className="mx-auto max-w-6xl px-6 py-16 grid gap-10 md:grid-cols-4">
         <div>
+          <LogoMark className="w-9 h-9 mb-3" />
           <p className="font-body text-xs leading-tight tracking-[0.04em] text-gold uppercase mb-1 max-w-[14rem]">
             Redeemed Christian Church of God
           </p>
