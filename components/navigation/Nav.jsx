@@ -2,8 +2,10 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { Search } from "lucide-react";
 import { Magnetic } from "@/components/ui/Magnetic";
 import { LogoMark } from "@/components/ui/LogoMark";
+import { SearchModal } from "@/components/navigation/SearchModal";
 import { routes, primaryNavPaths } from "@/lib/content/routes";
 
 const LINKS = primaryNavPaths
@@ -13,6 +15,7 @@ const LINKS = primaryNavPaths
 
 export function Nav() {
   const [open, setOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
 
   useEffect(() => {
     if (!open) return undefined;
@@ -32,9 +35,20 @@ export function Nav() {
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [open]);
 
+  useEffect(() => {
+    function onKeyDown(event) {
+      if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k") {
+        event.preventDefault();
+        setSearchOpen((prev) => !prev);
+      }
+    }
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, []);
+
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-40 bg-ivory/90 backdrop-blur border-b border-ink/10">
+      <header className="fixed top-[var(--bar-h,0px)] left-0 right-0 z-40 bg-ivory/90 backdrop-blur border-b border-ink/10">
         <div className="mx-auto max-w-6xl flex items-center justify-between px-6 py-4">
           <Link href="/" className="flex items-center gap-2.5">
             <LogoMark className="w-8 h-8 shrink-0" />
@@ -46,28 +60,44 @@ export function Nav() {
             </span>
           </Link>
 
-          <nav className="hidden md:flex items-center gap-6">
-            {LINKS.map((link) => (
-              <Magnetic key={link.href} strength={0.25}>
-                <Link href={link.href} className="font-body text-sm text-ink hover:text-royal">
-                  {link.label}
-                </Link>
-              </Magnetic>
-            ))}
-          </nav>
+          <div className="flex items-center gap-1 md:gap-3">
+            <nav className="hidden md:flex items-center gap-6 mr-2">
+              {LINKS.map((link) => (
+                <Magnetic key={link.href} strength={0.25}>
+                  <Link href={link.href} className="font-body text-sm text-ink hover:text-royal">
+                    {link.label}
+                  </Link>
+                </Magnetic>
+              ))}
+            </nav>
 
-          <button
-            type="button"
-            className="md:hidden font-body text-sm py-2 px-1 -mr-1"
-            onClick={() => setOpen(true)}
-            aria-expanded={open}
-            aria-haspopup="dialog"
-            aria-label="Open menu"
-          >
-            Menu
-          </button>
+            <button
+              type="button"
+              onClick={() => setSearchOpen(true)}
+              aria-label="Search"
+              className="p-2 rounded-full text-ink hover:bg-ink/5 transition-colors duration-200 flex items-center gap-1.5"
+            >
+              <Search size={18} strokeWidth={2} aria-hidden />
+              <kbd className="hidden lg:inline-block font-body text-[10px] font-bold text-ink/40 bg-ink/5 border border-ink/10 rounded px-1.5 py-0.5">
+                ⌘K
+              </kbd>
+            </button>
+
+            <button
+              type="button"
+              className="md:hidden font-body text-sm py-2 px-1"
+              onClick={() => setOpen(true)}
+              aria-expanded={open}
+              aria-haspopup="dialog"
+              aria-label="Open menu"
+            >
+              Menu
+            </button>
+          </div>
         </div>
       </header>
+
+      <SearchModal open={searchOpen} onClose={() => setSearchOpen(false)} />
 
       {/* Backdrop and panel live outside <header> — header's backdrop-blur
           (a CSS filter) establishes a containing block for any

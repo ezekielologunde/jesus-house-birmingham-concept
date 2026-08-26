@@ -1,6 +1,20 @@
+import { Baby, Users, Shield, Heart, Camera, DoorOpen, HeartHandshake, Globe, Music2 } from "lucide-react";
 import { ministries } from "@/lib/content/ministries";
 import { Reveal } from "@/components/ui/Reveal";
 import { RevealText } from "@/components/ui/RevealText";
+import { IconBadge } from "@/components/ui/IconBadge";
+
+const ICONS = {
+  children: Baby,
+  youth: Users,
+  mens: Shield,
+  womens: Heart,
+  media: Camera,
+  ushering: DoorOpen,
+  "prayer-band": HeartHandshake,
+  outreach: Globe,
+  choir: Music2,
+};
 
 export const metadata = {
   title: "Ministries | Jesus House Birmingham (Unofficial Concept)",
@@ -29,6 +43,7 @@ export default function Ministries() {
             delay={i * 60}
             className="bg-white rounded-2xl shadow-card hover:shadow-card-hover transition-shadow duration-300 p-6"
           >
+            <IconBadge icon={ICONS[m.id] ?? Users} className="mb-4" />
             <h2 className="font-display text-xl md:text-2xl tracking-tight mb-2">{m.name}</h2>
             <p className="font-body text-sm text-ink/70">{m.description}</p>
           </Reveal>

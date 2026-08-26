@@ -2,6 +2,7 @@ import { Anton, Manrope } from "next/font/google";
 import "./globals.css";
 import { SmoothScroll } from "@/components/providers/SmoothScroll";
 import { Nav } from "@/components/navigation/Nav";
+import { EngagementOverlays } from "@/components/navigation/EngagementOverlays";
 import { Footer } from "@/components/sections/Footer";
 import { ScrollProgress } from "@/components/ui/ScrollProgress";
 
@@ -51,9 +52,12 @@ export default function RootLayout({ children }) {
           Skip to main content
         </a>
         <ScrollProgress />
+        <EngagementOverlays />
         <SmoothScroll>
           <Nav />
-          <div id="main-content">{children}</div>
+          <div id="main-content" style={{ paddingTop: "var(--bar-h, 0px)" }}>
+            {children}
+          </div>
           <Footer />
         </SmoothScroll>
       </body>

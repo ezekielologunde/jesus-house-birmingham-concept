@@ -2,6 +2,7 @@ import Link from "next/link";
 import { siteInfo } from "@/lib/content/siteInfo";
 import { LogoMark } from "@/components/ui/LogoMark";
 import { NewsletterForm } from "@/components/ui/NewsletterForm";
+import { FacebookIcon, InstagramIcon } from "@/components/ui/SocialIcons";
 import { routes, secondaryNavPaths } from "@/lib/content/routes";
 
 const MORE_LINKS = secondaryNavPaths
@@ -49,22 +50,24 @@ export function Footer() {
               {siteInfo.email}
             </a>
           </p>
-          <div className="flex gap-4 mt-2 -mx-1">
+          <div className="flex gap-2 mt-2 -mx-2">
             <a
               href={siteInfo.facebook}
-              className="underline py-2 px-1"
+              aria-label="Facebook"
+              className="p-2 rounded-full text-ivory/70 hover:text-ivory hover:bg-ivory/10 transition-colors duration-200"
               target="_blank"
               rel="noopener noreferrer"
             >
-              Facebook
+              <FacebookIcon size={18} />
             </a>
             <a
               href={siteInfo.instagram}
-              className="underline py-2 px-1"
+              aria-label="Instagram"
+              className="p-2 rounded-full text-ivory/70 hover:text-ivory hover:bg-ivory/10 transition-colors duration-200"
               target="_blank"
               rel="noopener noreferrer"
             >
-              Instagram
+              <InstagramIcon size={18} />
             </a>
           </div>
         </div>
