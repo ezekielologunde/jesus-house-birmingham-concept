@@ -9,6 +9,18 @@ describe("Contact page", () => {
     expect(screen.getByText("secretary@jesushousebhm.org")).toBeInTheDocument();
   });
 
+  it("makes the phone and email tap-to-call/email on mobile", () => {
+    render(<Contact />);
+    expect(screen.getByText("(205) 201-4093").closest("a")).toHaveAttribute(
+      "href",
+      "tel:+12052014093"
+    );
+    expect(screen.getByText("secretary@jesushousebhm.org").closest("a")).toHaveAttribute(
+      "href",
+      "mailto:secretary@jesushousebhm.org"
+    );
+  });
+
   it("has a contact form with a message field", () => {
     render(<Contact />);
     expect(screen.getByLabelText("Message")).toBeInTheDocument();

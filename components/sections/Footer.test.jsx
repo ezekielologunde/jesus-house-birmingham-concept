@@ -10,6 +10,18 @@ describe("Footer", () => {
     expect(screen.getByText("secretary@jesushousebhm.org")).toBeInTheDocument();
   });
 
+  it("makes the phone and email tap-to-call/email on mobile", () => {
+    render(<Footer />);
+    expect(screen.getByText("(205) 201-4093").closest("a")).toHaveAttribute(
+      "href",
+      "tel:+12052014093"
+    );
+    expect(screen.getByText("secretary@jesushousebhm.org").closest("a")).toHaveAttribute(
+      "href",
+      "mailto:secretary@jesushousebhm.org"
+    );
+  });
+
   it("shows the unofficial-concept disclaimer with a link to the real site", () => {
     render(<Footer />);
     expect(screen.getByText(/unofficial/i)).toBeInTheDocument();

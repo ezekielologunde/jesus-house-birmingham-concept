@@ -33,7 +33,7 @@ export function Nav() {
 
         <button
           type="button"
-          className="md:hidden font-body text-sm"
+          className="md:hidden font-body text-sm py-2 px-1 -mr-1"
           onClick={() => setOpen((v) => !v)}
           aria-expanded={open}
           aria-label="Toggle menu"
@@ -48,13 +48,13 @@ export function Nav() {
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            className="md:hidden flex flex-col gap-4 px-6 pb-6 overflow-hidden"
+            className="md:hidden flex flex-col gap-1 px-6 pb-6 overflow-hidden bg-ivory"
           >
             {LINKS.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="font-body text-base"
+                className="font-body text-base py-3"
                 onClick={() => setOpen(false)}
               >
                 {link.label}

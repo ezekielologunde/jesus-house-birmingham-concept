@@ -30,7 +30,7 @@ export default function Giving() {
           <Reveal key={method.id} delay={i * 70}>
             <h2 className="font-display text-xl md:text-2xl">
               {method.href ? (
-                <a href={method.href} className="text-royal underline">
+                <a href={method.href} className="text-royal underline inline-block py-1 -my-1">
                   {method.name}
                 </a>
               ) : (

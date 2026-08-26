@@ -12,13 +12,34 @@ export function Footer() {
 
         <div className="text-sm text-ivory/80 flex flex-col gap-1">
           <p>{siteInfo.address}</p>
-          <p>{siteInfo.phone}</p>
-          <p>{siteInfo.email}</p>
-          <div className="flex gap-4 mt-2">
-            <a href={siteInfo.facebook} className="underline" target="_blank" rel="noopener noreferrer">
+          <p>
+            <a
+              href={`tel:+1${siteInfo.phone.replace(/\D/g, "")}`}
+              className="underline inline-block py-1 -my-1"
+            >
+              {siteInfo.phone}
+            </a>
+          </p>
+          <p>
+            <a href={`mailto:${siteInfo.email}`} className="underline inline-block py-1 -my-1">
+              {siteInfo.email}
+            </a>
+          </p>
+          <div className="flex gap-4 mt-2 -mx-1">
+            <a
+              href={siteInfo.facebook}
+              className="underline py-2 px-1"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Facebook
             </a>
-            <a href={siteInfo.instagram} className="underline" target="_blank" rel="noopener noreferrer">
+            <a
+              href={siteInfo.instagram}
+              className="underline py-2 px-1"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Instagram
             </a>
           </div>

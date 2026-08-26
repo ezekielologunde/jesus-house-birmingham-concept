@@ -22,8 +22,19 @@ export default function Contact() {
         </p>
         <div className="font-body text-sm text-ink/80 flex flex-col gap-1 mb-10">
           <p>{siteInfo.address}</p>
-          <p>{siteInfo.phone}</p>
-          <p>{siteInfo.email}</p>
+          <p>
+            <a
+              href={`tel:+1${siteInfo.phone.replace(/\D/g, "")}`}
+              className="underline inline-block py-1 -my-1"
+            >
+              {siteInfo.phone}
+            </a>
+          </p>
+          <p>
+            <a href={`mailto:${siteInfo.email}`} className="underline inline-block py-1 -my-1">
+              {siteInfo.email}
+            </a>
+          </p>
         </div>
       </Reveal>
 
