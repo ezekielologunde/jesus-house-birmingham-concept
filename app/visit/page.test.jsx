@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import Visit from "./page";
 
 describe("Visit page", () => {
@@ -12,5 +12,22 @@ describe("Visit page", () => {
   it("has a plan-a-visit form with a name field", () => {
     render(<Visit />);
     expect(screen.getByLabelText("Name")).toBeInTheDocument();
+  });
+
+  it("has a What to Expect FAQ that answers with real, sourced facts (not invented ones)", () => {
+    render(<Visit />);
+    expect(screen.getByText("What to Expect")).toBeInTheDocument();
+
+    const lengthButton = screen
+      .getByText("What time is the Main Service, and how long does it run?")
+      .closest("button");
+    fireEvent.click(lengthButton);
+    expect(screen.getByText(/Rhema Expression starts the morning at 9:00 AM/)).toBeInTheDocument();
+
+    const officialButton = screen
+      .getByText("Is this Jesus House Birmingham's official website?")
+      .closest("button");
+    fireEvent.click(officialButton);
+    expect(screen.getByText(/unofficial redesign concept/)).toBeInTheDocument();
   });
 });

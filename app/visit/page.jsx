@@ -2,6 +2,7 @@ import { siteInfo } from "@/lib/content/siteInfo";
 import { serviceTimes } from "@/lib/content/serviceTimes";
 import { Reveal } from "@/components/ui/Reveal";
 import { ConceptForm } from "@/components/ui/ConceptForm";
+import { FaqAccordion } from "@/components/ui/FaqAccordion";
 
 export const metadata = {
   title: "Visit | Jesus House Birmingham (Unofficial Concept)",
@@ -14,6 +15,38 @@ const FORM_FIELDS = [
 
 export default function Visit() {
   const mapSrc = `https://www.google.com/maps?q=${encodeURIComponent(siteInfo.address)}&output=embed`;
+  const mainService = serviceTimes.find((s) => s.id === "main");
+  const rhemaService = serviceTimes.find((s) => s.id === "rhema");
+  const realSiteDomain = siteInfo.realSiteUrl.replace("https://www.", "").replace(/\/$/, "");
+
+  const faqs = [
+    {
+      id: "official",
+      question: "Is this Jesus House Birmingham's official website?",
+      answer: `No — this is an unofficial redesign concept and isn't affiliated with or endorsed by Jesus House Birmingham. For the real, official site, visit ${realSiteDomain}.`,
+    },
+    {
+      id: "dress-code",
+      question: "What should I wear?",
+      answer:
+        "Come as you are. There's no dress code — many people dress smart-casual, but you're welcome exactly as you're comfortable.",
+    },
+    {
+      id: "length",
+      question: "What time is the Main Service, and how long does it run?",
+      answer: `The Main Service runs ${mainService.time} on Sundays. If you'd like to come earlier, ${rhemaService.label} starts the morning at ${rhemaService.time}.`,
+    },
+    {
+      id: "what-to-expect",
+      question: "What happens during a service?",
+      answer: `Expect passionate worship and a Bible-based message. Our heart is simple: ${siteInfo.coreMessage} — in a style that's contemporary but rooted in spirit and truth.`,
+    },
+    {
+      id: "more-questions",
+      question: "I have more questions — how do I reach someone?",
+      answer: `Call or email us directly — ${siteInfo.phone} or ${siteInfo.email} — or use the form on our Contact page.`,
+    },
+  ];
 
   return (
     <main className="px-6 pt-32 pb-24 max-w-5xl mx-auto">
@@ -64,6 +97,11 @@ export default function Visit() {
           </ConceptForm>
         </Reveal>
       </div>
+
+      <Reveal delay={80}>
+        <h2 className="font-display text-2xl md:text-3xl mt-16 mb-6">What to Expect</h2>
+        <FaqAccordion items={faqs} />
+      </Reveal>
     </main>
   );
 }
