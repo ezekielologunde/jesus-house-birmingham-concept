@@ -42,11 +42,12 @@ export function Hero() {
       </p>
 
       <h1 className="font-display text-5xl md:text-7xl text-ink max-w-4xl overflow-hidden">
-        {words.map((word, i) => (
+        {words.flatMap((word, i) => [
           <span key={`${word}-${i}`} data-hero-word style={{ display: "inline-block" }}>
-            {word}{i < words.length - 1 ? " " : ""}
-          </span>
-        ))}
+            {word}
+          </span>,
+          i < words.length - 1 ? " " : "",
+        ])}
       </h1>
 
       <div className="flex flex-wrap gap-4 mt-10">
