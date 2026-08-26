@@ -26,7 +26,7 @@ export function Nav() {
     <header className="fixed top-0 left-0 right-0 z-40 bg-ivory/90 backdrop-blur border-b border-ink/10">
       <div className="mx-auto max-w-6xl flex items-center justify-between px-6 py-4">
         <Link href="/" className="flex flex-col leading-none">
-          <span className="font-body text-[0.6rem] tracking-[0.25em] text-gold uppercase mb-0.5">
+          <span className="font-body text-[0.6rem] tracking-[0.25em] text-royal uppercase mb-0.5">
             RCCG
           </span>
           <span className="font-display text-xl text-royal">Jesus House</span>

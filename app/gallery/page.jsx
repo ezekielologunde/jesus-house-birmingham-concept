@@ -16,11 +16,11 @@ const TILES = [
 
 const GRADIENTS = [
   "from-royal to-midnight",
-  "from-gold to-royal",
-  "from-midnight to-ink",
-  "from-sky to-gold",
-  "from-royal to-gold",
+  "from-midnight to-royal",
   "from-ink to-midnight",
+  "from-midnight to-ink",
+  "from-royal to-ink",
+  "from-ink to-royal",
 ];
 
 export default function Gallery() {
