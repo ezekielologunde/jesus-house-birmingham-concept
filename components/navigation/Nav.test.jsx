@@ -1,5 +1,5 @@
-import { describe, it, expect } from "vitest";
-import { render, screen } from "@testing-library/react";
+import { describe, it, expect, afterEach } from "vitest";
+import { render, screen, fireEvent, within } from "@testing-library/react";
 import { Nav } from "./Nav";
 import { routes, primaryNavPaths, secondaryNavPaths } from "@/lib/content/routes";
 
@@ -34,5 +34,53 @@ describe("Nav", () => {
   it("shows the real church name as the wordmark", () => {
     render(<Nav />);
     expect(screen.getAllByText("Jesus House").length).toBeGreaterThan(0);
+  });
+
+  describe("mobile slide-in menu", () => {
+    afterEach(() => {
+      document.body.style.overflow = "";
+    });
+
+    it("opens the panel and locks body scroll when the menu button is clicked", () => {
+      render(<Nav />);
+      expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+
+      fireEvent.click(screen.getByLabelText("Open menu"));
+
+      expect(screen.getByRole("dialog", { name: "Site menu" })).toBeInTheDocument();
+      expect(document.body.style.overflow).toBe("hidden");
+    });
+
+    it("closes the panel and restores body scroll when the close button is clicked", () => {
+      render(<Nav />);
+      fireEvent.click(screen.getByLabelText("Open menu"));
+      fireEvent.click(screen.getByLabelText("Close menu"));
+
+      expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+      expect(document.body.style.overflow).toBe("");
+    });
+
+    it("closes the panel when the Escape key is pressed", () => {
+      render(<Nav />);
+      fireEvent.click(screen.getByLabelText("Open menu"));
+      fireEvent.keyDown(window, { key: "Escape" });
+
+      expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+    });
+
+    it("closes the panel when a link inside it is clicked", () => {
+      render(<Nav />);
+      fireEvent.click(screen.getByLabelText("Open menu"));
+
+      const dialog = screen.getByRole("dialog");
+      const [firstLink] = PRIMARY_ROUTES;
+      fireEvent.click(
+        within(dialog)
+          .getAllByText(firstLink[0])
+          .find((el) => el.closest("a"))
+      );
+
+      expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+    });
   });
 });

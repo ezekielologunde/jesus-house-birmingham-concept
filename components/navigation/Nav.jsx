@@ -1,8 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
 import { Magnetic } from "@/components/ui/Magnetic";
 import { routes, primaryNavPaths } from "@/lib/content/routes";
 
@@ -14,58 +13,121 @@ const LINKS = primaryNavPaths
 export function Nav() {
   const [open, setOpen] = useState(false);
 
+  useEffect(() => {
+    if (!open) return undefined;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [open]);
+
+  useEffect(() => {
+    if (!open) return undefined;
+    const onKeyDown = (event) => {
+      if (event.key === "Escape") setOpen(false);
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [open]);
+
   return (
-    <header className="fixed top-0 left-0 right-0 z-40 bg-ivory/90 backdrop-blur border-b border-ink/10">
-      <div className="mx-auto max-w-6xl flex items-center justify-between px-6 py-4">
-        <Link href="/" className="flex flex-col leading-none">
-          <span className="font-body text-[0.6rem] tracking-[0.25em] text-royal uppercase mb-0.5">
-            RCCG
-          </span>
-          <span className="font-display text-xl text-royal">Jesus House</span>
-        </Link>
+    <>
+      <header className="fixed top-0 left-0 right-0 z-40 bg-ivory/90 backdrop-blur border-b border-ink/10">
+        <div className="mx-auto max-w-6xl flex items-center justify-between px-6 py-4">
+          <Link href="/" className="flex flex-col leading-none">
+            <span className="font-body text-[0.6rem] tracking-[0.25em] text-royal uppercase mb-0.5">
+              RCCG
+            </span>
+            <span className="font-display text-xl text-royal">Jesus House</span>
+          </Link>
 
-        <nav className="hidden md:flex items-center gap-6">
-          {LINKS.map((link) => (
-            <Magnetic key={link.href} strength={0.25}>
-              <Link href={link.href} className="font-body text-sm text-ink hover:text-royal">
-                {link.label}
-              </Link>
-            </Magnetic>
-          ))}
-        </nav>
-
-        <button
-          type="button"
-          className="md:hidden font-body text-sm py-2 px-1 -mr-1"
-          onClick={() => setOpen((v) => !v)}
-          aria-expanded={open}
-          aria-label="Toggle menu"
-        >
-          {open ? "Close" : "Menu"}
-        </button>
-      </div>
-
-      <AnimatePresence>
-        {open ? (
-          <motion.nav
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            className="md:hidden flex flex-col gap-1 px-6 pb-6 overflow-hidden bg-ivory"
-          >
+          <nav className="hidden md:flex items-center gap-6">
             {LINKS.map((link) => (
+              <Magnetic key={link.href} strength={0.25}>
+                <Link href={link.href} className="font-body text-sm text-ink hover:text-royal">
+                  {link.label}
+                </Link>
+              </Magnetic>
+            ))}
+          </nav>
+
+          <button
+            type="button"
+            className="md:hidden font-body text-sm py-2 px-1 -mr-1"
+            onClick={() => setOpen(true)}
+            aria-expanded={open}
+            aria-haspopup="dialog"
+            aria-label="Open menu"
+          >
+            Menu
+          </button>
+        </div>
+      </header>
+
+      {/* Backdrop and panel live outside <header> — header's backdrop-blur
+          (a CSS filter) establishes a containing block for any
+          position:fixed descendant, which would size/position these against
+          header's own small box instead of the viewport. They also stay
+          mounted (opacity/transform only) instead of mounting on open — an
+          animate-out-then-unmount approach never resolves under jsdom, which
+          has no real compositor to signal animation completion. */}
+      <div
+        className={`md:hidden fixed inset-0 z-40 bg-ink/40 backdrop-blur-sm transition-opacity duration-300 motion-reduce:transition-none ${
+          open ? "opacity-100" : "opacity-0 pointer-events-none"
+        }`}
+        onClick={() => setOpen(false)}
+      />
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-label="Site menu"
+        aria-hidden={!open}
+        className={`md:hidden fixed top-0 right-0 z-50 h-full w-full sm:w-[380px] flex flex-col bg-gradient-to-br from-flame to-gold overflow-y-auto transition-transform duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none ${
+          open ? "translate-x-0" : "translate-x-full pointer-events-none"
+        }`}
+      >
+        <div className="flex items-center justify-between px-6 py-5">
+          <span className="font-display text-xl text-white">Jesus House</span>
+          <button
+            type="button"
+            onClick={() => setOpen(false)}
+            aria-label="Close menu"
+            tabIndex={open ? 0 : -1}
+            className="w-10 h-10 rounded-full bg-white/20 hover:bg-white/30 text-white flex items-center justify-center transition-colors duration-200"
+          >
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path
+                d="M2 2l12 12M14 2L2 14"
+                stroke="currentColor"
+                strokeWidth="1.75"
+                strokeLinecap="round"
+              />
+            </svg>
+          </button>
+        </div>
+
+        <nav className="flex flex-col gap-2 px-6 py-2">
+          {LINKS.map((link, i) => (
+            <div
+              key={link.href}
+              className={`transition-all duration-300 ease-out motion-reduce:transition-none ${
+                open ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+              }`}
+              style={{ transitionDelay: open ? `${100 + i * 50}ms` : "0ms" }}
+            >
               <Link
-                key={link.href}
                 href={link.href}
-                className="font-body text-base py-3"
                 onClick={() => setOpen(false)}
+                tabIndex={open ? 0 : -1}
+                className="block px-5 py-4 text-lg font-body font-semibold text-white rounded-2xl bg-white/10 hover:bg-white/20 transition-colors duration-200"
               >
                 {link.label}
               </Link>
-            ))}
-          </motion.nav>
-        ) : null}
-      </AnimatePresence>
-    </header>
+            </div>
+          ))}
+        </nav>
+      </div>
+    </>
   );
 }
