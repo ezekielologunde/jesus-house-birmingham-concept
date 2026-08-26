@@ -9,10 +9,10 @@ export default function Events() {
   return (
     <main className="px-6 pt-32 pb-24 max-w-5xl mx-auto">
       <Reveal>
-        <h1 className="font-display text-4xl mb-12">Events</h1>
+        <h1 className="font-display text-4xl md:text-5xl lg:text-6xl mb-12">Events</h1>
       </Reveal>
 
-      <h2 className="font-display text-2xl mb-6">Every Week</h2>
+      <h2 className="font-display text-2xl md:text-3xl mb-6">Every Week</h2>
       <div className="grid gap-6 md:grid-cols-4 mb-16">
         {recurringEvents.map((e, i) => (
           <Reveal key={e.id} delay={i * 60}>
@@ -22,7 +22,7 @@ export default function Events() {
         ))}
       </div>
 
-      <h2 className="font-display text-2xl mb-2">Annual Programs</h2>
+      <h2 className="font-display text-2xl md:text-3xl mb-2">Annual Programs</h2>
       <p className="font-body text-sm text-ink/60 mb-6">
         Two signature annual weeks, real programs run by the men&apos;s and young adults&apos; ministries.
       </p>

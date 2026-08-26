@@ -10,7 +10,7 @@ export default function Giving() {
   return (
     <main className="px-6 pt-32 pb-24 max-w-3xl mx-auto">
       <Reveal>
-        <h1 className="font-display text-4xl mb-4">Help Us Spread Love and Faith</h1>
+        <h1 className="font-display text-4xl md:text-5xl lg:text-6xl mb-4">Help Us Spread Love and Faith</h1>
         <p className="font-body text-ink/80 mb-3">
           Your financial contribution means the world to us and helps us continue our mission of
           serving the community.
@@ -28,7 +28,7 @@ export default function Giving() {
       <div className="grid gap-6 mt-12">
         {givingMethods.map((method, i) => (
           <Reveal key={method.id} delay={i * 70}>
-            <h2 className="font-display text-xl">
+            <h2 className="font-display text-xl md:text-2xl">
               {method.href ? (
                 <a href={method.href} className="text-royal underline">
                   {method.name}

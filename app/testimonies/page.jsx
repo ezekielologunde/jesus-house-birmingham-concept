@@ -9,7 +9,7 @@ export default function Testimonies() {
   return (
     <main className="px-6 pt-32 pb-24 max-w-2xl mx-auto text-center">
       <Reveal>
-        <h1 className="font-display text-4xl mb-4">Share Your Testimony</h1>
+        <h1 className="font-display text-4xl md:text-5xl lg:text-6xl mb-4">Share Your Testimony</h1>
         <p className="font-body text-ink/80 mb-8">
           This concept build doesn&rsquo;t include real member testimonies — we won&rsquo;t
           invent quotes and attribute them to a real congregation. On the real site, this is

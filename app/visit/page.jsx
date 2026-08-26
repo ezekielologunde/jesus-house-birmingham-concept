@@ -18,7 +18,7 @@ export default function Visit() {
   return (
     <main className="px-6 pt-32 pb-24 max-w-5xl mx-auto">
       <Reveal>
-        <h1 className="font-display text-4xl mb-4">Plan Your Visit</h1>
+        <h1 className="font-display text-4xl md:text-5xl lg:text-6xl mb-4">Plan Your Visit</h1>
         <p className="font-body text-ink/80 max-w-2xl">
           Join our church family and experience the warmth of a community that cares.
         </p>
@@ -36,7 +36,7 @@ export default function Visit() {
 
       <div className="grid gap-10 md:grid-cols-2">
         <Reveal>
-          <h2 className="font-display text-2xl mb-3">Address</h2>
+          <h2 className="font-display text-2xl md:text-3xl mb-3">Address</h2>
           <p className="font-body text-ink/80 mb-4">{siteInfo.address}</p>
           <iframe
             title="Map to Jesus House Birmingham"
@@ -47,7 +47,7 @@ export default function Visit() {
         </Reveal>
 
         <Reveal delay={80}>
-          <h2 className="font-display text-2xl mb-3">Plan a Visit</h2>
+          <h2 className="font-display text-2xl md:text-3xl mb-3">Plan a Visit</h2>
           <ConceptForm
             fields={FORM_FIELDS}
             submitLabel="Let Us Know You're Coming"

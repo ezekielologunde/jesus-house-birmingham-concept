@@ -8,7 +8,7 @@ export function MinistriesPreview() {
   return (
     <section className="px-6 py-20 bg-ivory">
       <div className="mx-auto max-w-5xl">
-        <h2 className="font-display text-3xl mb-8">Ministries</h2>
+        <h2 className="font-display text-3xl md:text-4xl mb-8">Ministries</h2>
         <div className="grid gap-6 md:grid-cols-4">
           {preview.map((m, i) => (
             <Reveal key={m.id} delay={i * 80}>

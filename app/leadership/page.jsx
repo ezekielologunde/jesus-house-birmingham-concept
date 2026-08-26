@@ -21,7 +21,7 @@ export default function Leadership() {
   return (
     <main className="px-6 pt-32 pb-24 max-w-5xl mx-auto">
       <Reveal>
-        <h1 className="font-display text-4xl mb-2">Leadership Team</h1>
+        <h1 className="font-display text-4xl md:text-5xl lg:text-6xl mb-2">Leadership Team</h1>
         <p className="font-body text-ink/70 mb-12">
           No leadership photos exist for this concept build — shown with monogram avatars instead.
         </p>
@@ -37,7 +37,7 @@ export default function Leadership() {
         ))}
       </div>
 
-      <h2 className="font-display text-2xl mb-6">Ministry Leads</h2>
+      <h2 className="font-display text-2xl md:text-3xl mb-6">Ministry Leads</h2>
       <div className="grid gap-4 md:grid-cols-4">
         {ministryLeads.map((m, i) => (
           <Reveal key={m.name} delay={i * 60} className="flex items-center gap-3">

@@ -8,7 +8,7 @@ export function EventsPreview() {
   return (
     <section className="px-6 py-20 bg-sky">
       <div className="mx-auto max-w-5xl">
-        <h2 className="font-display text-3xl mb-8">Upcoming</h2>
+        <h2 className="font-display text-3xl md:text-4xl mb-8">Upcoming</h2>
         <div className="grid gap-6 md:grid-cols-2">
           {preview.map((e, i) => (
             <Reveal key={e.id} delay={i * 80}>

@@ -27,7 +27,7 @@ export default function Gallery() {
   return (
     <main className="px-6 pt-32 pb-24 max-w-5xl mx-auto">
       <Reveal>
-        <h1 className="font-display text-4xl mb-2">Gallery</h1>
+        <h1 className="font-display text-4xl md:text-5xl lg:text-6xl mb-2">Gallery</h1>
         <p className="font-body text-sm text-ink/60 mb-12">
           No real photography exists for this concept build — these are styled placeholder tiles,
           not actual photos of the church.
