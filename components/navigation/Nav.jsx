@@ -53,10 +53,10 @@ export function Nav() {
           <Link href="/" className="flex items-center gap-2.5">
             <LogoMark className="w-8 h-8 shrink-0" />
             <span className="flex flex-col leading-none">
-              <span className="font-body text-[0.55rem] leading-tight tracking-[0.04em] text-royal uppercase mb-0.5 max-w-[9.5rem]">
+              <span className="hidden lg:block font-body text-[0.65rem] leading-tight tracking-[0.03em] text-royal uppercase mb-1 max-w-[11rem]">
                 Redeemed Christian Church of God
               </span>
-              <span className="font-display text-xl text-royal">Jesus House</span>
+              <span className="font-display text-2xl text-royal">Jesus House</span>
             </span>
           </Link>
 
