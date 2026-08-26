@@ -15,7 +15,6 @@ export default defineConfig({
   resolve: {
     alias: {
       "next/font/google": path.resolve(__dirname, "./tests/mocks/next-font-google.js"),
-      "@/app/layout.js": path.resolve(__dirname, "./app/layout.jsx"),
       "@": path.resolve(__dirname, "."),
     },
   },

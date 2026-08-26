@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { metadata } from "@/app/layout.js";
+import { metadata } from "@/app/layout.jsx";
 
 describe("root layout metadata", () => {
   it("has the real site title and an unofficial-concept description", () => {
