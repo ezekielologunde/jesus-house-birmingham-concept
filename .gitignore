@@ -1,0 +1,10 @@
+node_modules/
+.next/
+.env*.local
+coverage/
+
+# Private source material (WhatsApp exports, personal photos) — never commit.
+# Only aggregate, non-personal facts extracted from these are used in the site,
+# per the design spec's privacy boundary — the raw files themselves must not
+# enter version control.
+WhatsApp*
