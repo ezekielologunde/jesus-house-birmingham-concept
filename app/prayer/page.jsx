@@ -3,6 +3,7 @@ import { ConceptForm } from "@/components/ui/ConceptForm";
 
 export const metadata = {
   title: "Prayer Requests | Jesus House Birmingham (Unofficial Concept)",
+  description: "Submit a prayer request to Jesus House Birmingham (unofficial concept).",
 };
 
 const FORM_FIELDS = [

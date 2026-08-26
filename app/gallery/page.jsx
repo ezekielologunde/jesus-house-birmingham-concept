@@ -4,6 +4,7 @@ import { Parallax } from "@/components/ui/Parallax";
 
 export const metadata = {
   title: "Gallery | Jesus House Birmingham (Unofficial Concept)",
+  description: "Photos representing life at Jesus House Birmingham (unofficial concept).",
 };
 
 // Open-license (Unsplash) stock photos — not actual photos of Jesus House

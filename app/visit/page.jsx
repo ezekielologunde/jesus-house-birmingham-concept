@@ -7,6 +7,8 @@ import { NumberedList } from "@/components/ui/NumberedList";
 
 export const metadata = {
   title: "Visit | Jesus House Birmingham (Unofficial Concept)",
+  description:
+    "Service times, what to expect, and what to know before visiting Jesus House Birmingham (unofficial concept).",
 };
 
 const FORM_FIELDS = [

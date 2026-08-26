@@ -4,6 +4,8 @@ import { ConceptForm } from "@/components/ui/ConceptForm";
 
 export const metadata = {
   title: "Contact | Jesus House Birmingham (Unofficial Concept)",
+  description:
+    "Get directions, contact details, and send a message to Jesus House Birmingham (unofficial concept).",
 };
 
 const FORM_FIELDS = [

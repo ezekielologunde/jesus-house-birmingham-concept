@@ -5,6 +5,7 @@ import { Reveal } from "@/components/ui/Reveal";
 
 export const metadata = {
   title: "About | Jesus House Birmingham (Unofficial Concept)",
+  description: "Learn about Jesus House Birmingham's mission, vision, and beliefs (unofficial concept).",
 };
 
 export default function About() {

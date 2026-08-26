@@ -4,6 +4,7 @@ import { NumberedList } from "@/components/ui/NumberedList";
 
 export const metadata = {
   title: "Testimonies | Jesus House Birmingham (Unofficial Concept)",
+  description: "Stories of faith and community from Jesus House Birmingham (unofficial concept).",
 };
 
 const HOW_IT_WOULD_WORK = [

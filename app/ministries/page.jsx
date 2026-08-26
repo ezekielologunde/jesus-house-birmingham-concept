@@ -4,6 +4,7 @@ import { RevealText } from "@/components/ui/RevealText";
 
 export const metadata = {
   title: "Ministries | Jesus House Birmingham (Unofficial Concept)",
+  description: "Explore the ministries and small groups at Jesus House Birmingham (unofficial concept).",
 };
 
 export default function Ministries() {

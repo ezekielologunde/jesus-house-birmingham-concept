@@ -3,6 +3,7 @@ import { Reveal } from "@/components/ui/Reveal";
 
 export const metadata = {
   title: "Leadership | Jesus House Birmingham (Unofficial Concept)",
+  description: "Leadership team profiles for Jesus House Birmingham (unofficial concept).",
 };
 
 function Initials({ name }) {

@@ -4,6 +4,7 @@ import { AddToCalendarButton } from "@/components/ui/AddToCalendarButton";
 
 export const metadata = {
   title: "Events | Jesus House Birmingham (Unofficial Concept)",
+  description: "Upcoming services and annual programs at Jesus House Birmingham (unofficial concept).",
 };
 
 export default function Events() {

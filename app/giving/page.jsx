@@ -1,9 +1,11 @@
 import { givingMethods } from "@/lib/content/giving";
 import { siteInfo } from "@/lib/content/siteInfo";
 import { Reveal } from "@/components/ui/Reveal";
+import { DemoDonationForm } from "@/components/giving/DemoDonationForm";
 
 export const metadata = {
   title: "Giving | Jesus House Birmingham (Unofficial Concept)",
+  description: "Ways to give to Jesus House Birmingham, plus a demo online giving flow (unofficial concept).",
 };
 
 export default function Giving() {
@@ -45,6 +47,10 @@ export default function Giving() {
           </Reveal>
         ))}
       </div>
+
+      <Reveal delay={givingMethods.length * 70} className="mt-10">
+        <DemoDonationForm />
+      </Reveal>
     </main>
   );
 }
