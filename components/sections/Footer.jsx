@@ -1,13 +1,32 @@
+import Link from "next/link";
 import { siteInfo } from "@/lib/content/siteInfo";
+import { routes, secondaryNavPaths } from "@/lib/content/routes";
+
+const MORE_LINKS = secondaryNavPaths
+  .map((path) => routes.find((r) => r.path === path))
+  .filter(Boolean);
 
 export function Footer() {
   return (
     <footer className="bg-midnight text-ivory">
-      <div className="mx-auto max-w-6xl px-6 py-16 grid gap-10 md:grid-cols-3">
+      <div className="mx-auto max-w-6xl px-6 py-16 grid gap-10 md:grid-cols-4">
         <div>
           <p className="font-body text-xs tracking-[0.25em] text-gold uppercase mb-1">RCCG</p>
           <p className="font-display text-lg mb-2">{siteInfo.name}</p>
           <p className="text-sm text-ivory/80">{siteInfo.tagline}</p>
+        </div>
+
+        <div className="text-sm text-ivory/80 flex flex-col gap-2">
+          <p className="font-body text-xs tracking-[0.25em] text-gold uppercase mb-1">More</p>
+          {MORE_LINKS.map((r) => (
+            <Link
+              key={r.path}
+              href={`/${r.path}`}
+              className="underline inline-block py-1 -my-1 w-fit"
+            >
+              {r.label}
+            </Link>
+          ))}
         </div>
 
         <div className="text-sm text-ivory/80 flex flex-col gap-1">

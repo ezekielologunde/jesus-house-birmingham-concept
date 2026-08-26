@@ -1,6 +1,12 @@
 import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { Footer } from "./Footer";
+import { routes, secondaryNavPaths } from "@/lib/content/routes";
+
+const MORE_ROUTES = secondaryNavPaths
+  .map((path) => routes.find((r) => r.path === path))
+  .filter(Boolean)
+  .map((r) => [r.label, `/${r.path}`]);
 
 describe("Footer", () => {
   it("shows the real address, phone, and email", () => {
@@ -21,6 +27,14 @@ describe("Footer", () => {
       "mailto:secretary@jesushousebhm.org"
     );
   });
+
+  it.each(MORE_ROUTES)(
+    "links to %s (routes left out of the primary nav) at %s",
+    (label, href) => {
+      render(<Footer />);
+      expect(screen.getByText(label).closest("a")).toHaveAttribute("href", href);
+    }
+  );
 
   it("shows the unofficial-concept disclaimer with a link to the real site", () => {
     render(<Footer />);

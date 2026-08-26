@@ -4,9 +4,12 @@ import { useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Magnetic } from "@/components/ui/Magnetic";
-import { routes } from "@/lib/content/routes";
+import { routes, primaryNavPaths } from "@/lib/content/routes";
 
-const LINKS = routes.map((r) => ({ label: r.label, href: `/${r.path}` }));
+const LINKS = primaryNavPaths
+  .map((path) => routes.find((r) => r.path === path))
+  .filter(Boolean)
+  .map((r) => ({ label: r.label, href: `/${r.path}` }));
 
 export function Nav() {
   const [open, setOpen] = useState(false);

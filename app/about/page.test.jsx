@@ -10,6 +10,12 @@ describe("About page", () => {
     ).toBeInTheDocument();
   });
 
+  it("links to the Leadership page (dropped from the primary nav)", () => {
+    render(<About />);
+    const link = screen.getByText(/Meet our Leadership Team/);
+    expect(link.closest("a")).toHaveAttribute("href", "/leadership");
+  });
+
   it("shows RCCG's real worldwide and North America headquarters", () => {
     render(<About />);
     expect(screen.getByText(/Mowe, Ogun State, Nigeria/)).toBeInTheDocument();

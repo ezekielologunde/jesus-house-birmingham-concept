@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { siteInfo } from "@/lib/content/siteInfo";
 import { rccg } from "@/lib/content/rccg";
 import { Reveal } from "@/components/ui/Reveal";
@@ -15,6 +16,9 @@ export default function About() {
           Jesus House Birmingham is a parish of The Redeemed Christian Church of God (RCCG) in
           North America, and one of the parishes of RCCG worldwide.
         </p>
+        <Link href="/leadership" className="font-body text-royal underline inline-block py-1 -my-1">
+          Meet our Leadership Team →
+        </Link>
       </Reveal>
 
       <Reveal delay={80}>
