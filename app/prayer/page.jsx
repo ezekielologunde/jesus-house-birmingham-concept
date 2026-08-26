@@ -14,7 +14,7 @@ export default function Prayer() {
   return (
     <main className="px-6 pt-32 pb-24 max-w-2xl mx-auto">
       <Reveal>
-        <h1 className="font-display text-4xl md:text-5xl lg:text-6xl mb-4">Prayer Requests</h1>
+        <h1 className="font-display text-4xl md:text-5xl lg:text-6xl tracking-tight mb-4">Prayer Requests</h1>
         <p className="font-body text-ink/80 mb-2">
           We&rsquo;d be honored to stand with you in prayer.
         </p>

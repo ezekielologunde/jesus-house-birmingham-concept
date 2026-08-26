@@ -16,7 +16,7 @@ export default function Contact() {
   return (
     <main className="px-6 pt-32 pb-24 max-w-3xl mx-auto">
       <Reveal>
-        <h1 className="font-display text-4xl md:text-5xl lg:text-6xl mb-4">Contact Us</h1>
+        <h1 className="font-display text-4xl md:text-5xl lg:text-6xl tracking-tight mb-4">Contact Us</h1>
         <p className="font-body text-ink/80 mb-8">
           Reach out and we&rsquo;ll get back to you as soon as possible.
         </p>

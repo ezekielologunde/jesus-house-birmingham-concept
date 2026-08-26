@@ -12,8 +12,8 @@ export function FaqAccordion({ items, defaultOpenId = null }) {
         return (
           <div
             key={item.id}
-            className={`border rounded-lg bg-white transition-colors ${
-              isOpen ? "border-royal/30 bg-sky/30" : "border-ink/10"
+            className={`border rounded-lg transition-[box-shadow,border-color] duration-300 ${
+              isOpen ? "border-royal/30 shadow-card-hover glass-panel" : "border-ink/10 bg-white shadow-card"
             }`}
           >
             <button

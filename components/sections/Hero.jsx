@@ -41,7 +41,7 @@ export function Hero() {
         &ldquo;{siteInfo.verse.text}.&rdquo; — {siteInfo.verse.reference}
       </p>
 
-      <h1 className="font-display text-5xl md:text-7xl text-ink max-w-4xl overflow-hidden">
+      <h1 className="font-display text-5xl md:text-7xl tracking-tight text-ink max-w-4xl overflow-hidden">
         {words.flatMap((word, i) => [
           <span key={`${word}-${i}`} data-hero-word style={{ display: "inline-block" }}>
             {word}
@@ -56,7 +56,7 @@ export function Hero() {
             <Magnetic strength={0.2}>
               <Link
                 href={cta.href}
-                className="inline-block rounded-full bg-royal text-ivory px-6 py-3 font-body font-semibold"
+                className="inline-block rounded-full bg-royal text-ivory px-6 py-3 font-body font-semibold shadow-cta hover:shadow-cta-hover hover:-translate-y-0.5 transition-[box-shadow,transform] duration-200"
               >
                 {cta.label}
               </Link>

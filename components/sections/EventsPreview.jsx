@@ -8,11 +8,15 @@ export function EventsPreview() {
   return (
     <section className="px-6 py-20 bg-sky">
       <div className="mx-auto max-w-5xl">
-        <h2 className="font-display text-3xl md:text-4xl mb-8">Upcoming</h2>
+        <h2 className="font-display text-3xl md:text-4xl tracking-tight mb-8">Upcoming</h2>
         <div className="grid gap-6 md:grid-cols-2">
           {preview.map((e, i) => (
-            <Reveal key={e.id} delay={i * 80}>
-              <p className="font-display text-lg">{e.name}</p>
+            <Reveal
+              key={e.id}
+              delay={i * 80}
+              className="bg-white rounded-xl shadow-card hover:shadow-card-hover transition-shadow duration-300 p-5"
+            >
+              <p className="font-display text-lg tracking-tight">{e.name}</p>
               <p className="font-body text-sm text-ink/70">{e.time}</p>
             </Reveal>
           ))}

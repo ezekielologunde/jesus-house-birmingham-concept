@@ -24,7 +24,7 @@ export function ConceptForm({ fields, submitLabel, successMessage, children }) {
       <button
         type="submit"
         disabled={status === "submitting"}
-        className="bg-royal text-ivory rounded-full px-6 py-3 font-body font-semibold disabled:opacity-60"
+        className="bg-royal text-ivory rounded-full px-6 py-3 font-body font-semibold shadow-cta hover:shadow-cta-hover hover:-translate-y-0.5 transition-[box-shadow,transform] duration-200 disabled:opacity-60 disabled:hover:translate-y-0 disabled:hover:shadow-cta"
       >
         {status === "submitting" ? "Sending…" : submitLabel}
       </button>

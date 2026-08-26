@@ -51,7 +51,7 @@ export default function Visit() {
   return (
     <main className="px-6 pt-32 pb-24 max-w-5xl mx-auto">
       <Reveal>
-        <h1 className="font-display text-4xl md:text-5xl lg:text-6xl mb-4">Plan Your Visit</h1>
+        <h1 className="font-display text-4xl md:text-5xl lg:text-6xl tracking-tight mb-4">Plan Your Visit</h1>
         <p className="font-body text-ink/80 max-w-2xl">
           Join our church family and experience the warmth of a community that cares.
         </p>
@@ -59,9 +59,13 @@ export default function Visit() {
 
       <div className="grid gap-6 md:grid-cols-4 my-12">
         {serviceTimes.map((s, i) => (
-          <Reveal key={s.id} delay={i * 80}>
+          <Reveal
+            key={s.id}
+            delay={i * 80}
+            className="bg-white rounded-xl shadow-card hover:shadow-card-hover transition-shadow duration-300 p-5"
+          >
             <p className="font-body text-xs uppercase tracking-wide text-royal">{s.day}</p>
-            <p className="font-display text-lg">{s.label}</p>
+            <p className="font-display text-lg tracking-tight">{s.label}</p>
             <p className="font-body text-sm text-ink/70">{s.time}</p>
           </Reveal>
         ))}
@@ -69,7 +73,7 @@ export default function Visit() {
 
       <div className="grid gap-10 md:grid-cols-2">
         <Reveal>
-          <h2 className="font-display text-2xl md:text-3xl mb-3">Address</h2>
+          <h2 className="font-display text-2xl md:text-3xl tracking-tight mb-3">Address</h2>
           <p className="font-body text-ink/80 mb-4">{siteInfo.address}</p>
           <iframe
             title="Map to Jesus House Birmingham"
@@ -80,7 +84,7 @@ export default function Visit() {
         </Reveal>
 
         <Reveal delay={80}>
-          <h2 className="font-display text-2xl md:text-3xl mb-3">Plan a Visit</h2>
+          <h2 className="font-display text-2xl md:text-3xl tracking-tight mb-3">Plan a Visit</h2>
           <ConceptForm
             fields={FORM_FIELDS}
             submitLabel="Let Us Know You're Coming"
@@ -99,7 +103,7 @@ export default function Visit() {
       </div>
 
       <Reveal delay={80}>
-        <h2 className="font-display text-2xl md:text-3xl mt-16 mb-6">What to Expect</h2>
+        <h2 className="font-display text-2xl md:text-3xl tracking-tight mt-16 mb-6">What to Expect</h2>
         <FaqAccordion items={faqs} />
       </Reveal>
     </main>

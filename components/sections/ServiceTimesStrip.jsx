@@ -8,9 +8,13 @@ export function ServiceTimesStrip() {
       <section className="bg-sky px-6 py-16 min-h-screen flex items-center">
         <div className="mx-auto max-w-5xl grid gap-6 md:grid-cols-4">
           {serviceTimes.map((s, i) => (
-            <Reveal key={s.id} delay={i * 80}>
+            <Reveal
+              key={s.id}
+              delay={i * 80}
+              className="bg-white rounded-xl shadow-card hover:shadow-card-hover transition-shadow duration-300 p-5"
+            >
               <p className="font-body text-xs uppercase tracking-wide text-royal">{s.day}</p>
-              <p className="font-display text-lg">{s.label}</p>
+              <p className="font-display text-lg tracking-tight">{s.label}</p>
               <p className="font-body text-sm text-ink/70">{s.time}</p>
             </Reveal>
           ))}

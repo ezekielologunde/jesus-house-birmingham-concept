@@ -3,6 +3,7 @@
 @theme {
   --color-royal: #1e40c4;
   --color-gold: #ffc53d;
+  --color-flame: #ff6a00;
   --color-ivory: #f8faff;
   --color-ink: #0d1526;
   --color-sky: #e7eeff;
@@ -10,6 +11,23 @@
 
   --font-display: "Fraunces", ui-serif, Georgia, serif;
   --font-body: "Manrope", ui-sans-serif, system-ui, sans-serif;
+
+  /* Layered, tinted shadows (ink for resting surfaces, royal/flame for CTAs) —
+     two soft layers read as depth instead of a single hard drop shadow. */
+  --shadow-card: 0 1px 2px rgb(13 21 38 / 4%), 0 14px 28px rgb(13 21 38 / 8%);
+  --shadow-card-hover: 0 4px 10px rgb(13 21 38 / 6%), 0 22px 40px rgb(13 21 38 / 14%);
+  --shadow-cta: 0 2px 6px rgb(30 64 196 / 20%), 0 10px 24px rgb(30 64 196 / 35%);
+  --shadow-cta-hover: 0 3px 8px rgb(30 64 196 / 25%), 0 14px 32px rgb(30 64 196 / 42%);
+  --shadow-flame: 0 2px 6px rgb(255 106 0 / 25%), 0 10px 26px rgb(255 106 0 / 40%);
+  --shadow-flame-hover: 0 3px 8px rgb(255 106 0 / 30%), 0 14px 34px rgb(255 106 0 / 48%);
+}
+
+/* Frosted-glass surface — translucent + blurred, for panels that float over
+   busy content (mirrors the header's existing backdrop-blur treatment). */
+.glass-panel {
+  background: rgb(255 255 255 / 65%);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
 }
 
 html {
