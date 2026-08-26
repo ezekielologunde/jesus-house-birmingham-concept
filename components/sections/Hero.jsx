@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect } from "react";
+import { useRef, useLayoutEffect } from "react";
 import Link from "next/link";
 import { getGsap } from "@/lib/gsap";
 import { Magnetic } from "@/components/ui/Magnetic";
@@ -15,7 +15,7 @@ const CTAS = [
 export function Hero() {
   const scope = useRef(null);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const { gsap } = getGsap();
     const ctx = gsap.context(() => {
       gsap
@@ -38,7 +38,7 @@ export function Hero() {
 
       <h1 className="font-display text-5xl md:text-7xl text-ink max-w-4xl overflow-hidden">
         {words.map((word, i) => (
-          <span key={`${word}-${i}`} data-hero-word style={{ display: "inline-block", marginRight: "0.25em" }}>
+          <span key={`${word}-${i}`} data-hero-word style={{ display: "inline-block" }}>
             {word}{i < words.length - 1 ? " " : ""}
           </span>
         ))}
