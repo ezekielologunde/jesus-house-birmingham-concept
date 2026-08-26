@@ -1,5 +1,6 @@
 import { Fraunces, Manrope } from "next/font/google";
 import "./globals.css";
+import { SmoothScroll } from "@/components/providers/SmoothScroll";
 
 const fraunces = Fraunces({
   subsets: ["latin"],
@@ -22,7 +23,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${fraunces.variable} ${manrope.variable}`}>
-      <body className="font-body bg-ivory text-ink antialiased">{children}</body>
+      <body className="font-body bg-ivory text-ink antialiased">
+        <SmoothScroll>{children}</SmoothScroll>
+      </body>
     </html>
   );
 }
