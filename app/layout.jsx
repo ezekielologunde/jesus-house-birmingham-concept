@@ -18,11 +18,26 @@ const manrope = Manrope({
   display: "swap",
 });
 
+const TITLE = "Jesus House Birmingham | Unofficial Redesign Concept";
+const DESCRIPTION =
+  "An unofficial, motion-interactive redesign concept for Jesus House Birmingham (Redeemed Christian Church of God) — not affiliated with or endorsed by the church.";
+
 export const metadata = {
-  title: "Jesus House Birmingham | Unofficial Redesign Concept",
-  description:
-    "An unofficial, motion-interactive redesign concept for Jesus House Birmingham (Redeemed Christian Church of God) — not affiliated with or endorsed by the church.",
+  metadataBase: new URL("https://jesus-house-birmingham-concept.vercel.app"),
+  title: TITLE,
+  description: DESCRIPTION,
   robots: { index: false, follow: false },
+  openGraph: {
+    title: TITLE,
+    description: DESCRIPTION,
+    type: "website",
+    siteName: "Jesus House Birmingham (Unofficial Concept)",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: TITLE,
+    description: DESCRIPTION,
+  },
 };
 
 export default function RootLayout({ children }) {
