@@ -1,5 +1,19 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
+
+vi.mock("@/lib/gsap", () => ({
+  getGsap: () => ({
+    gsap: {
+      context: (fn) => {
+        fn();
+        return { revert: vi.fn() };
+      },
+      to: vi.fn(),
+    },
+    ScrollTrigger: {},
+  }),
+}));
+
 import Gallery from "./page";
 
 describe("Gallery page", () => {

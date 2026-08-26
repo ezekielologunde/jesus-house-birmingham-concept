@@ -15,7 +15,7 @@ vi.mock("@/lib/gsap", () => ({
       }),
       to: vi.fn(),
     },
-    ScrollTrigger: {},
+    ScrollTrigger: { create: vi.fn() },
   }),
 }));
 

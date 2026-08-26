@@ -1,4 +1,5 @@
 import { Reveal } from "@/components/ui/Reveal";
+import { Parallax } from "@/components/ui/Parallax";
 
 export const metadata = {
   title: "Gallery | Jesus House Birmingham (Unofficial Concept)",
@@ -35,13 +36,15 @@ export default function Gallery() {
 
       <div className="grid gap-6 md:grid-cols-3">
         {TILES.map((tile, i) => (
-          <Reveal key={tile.id} delay={i * 60}>
-            <div
-              className={`aspect-square rounded-lg bg-gradient-to-br ${GRADIENTS[i % GRADIENTS.length]} flex items-end p-4`}
-            >
-              <p className="font-body text-ivory text-sm font-semibold">{tile.caption}</p>
-            </div>
-          </Reveal>
+          <Parallax key={tile.id} speed={i % 2 === 0 ? 0.15 : -0.15}>
+            <Reveal delay={i * 60}>
+              <div
+                className={`aspect-square rounded-lg bg-gradient-to-br ${GRADIENTS[i % GRADIENTS.length]} flex items-end p-4`}
+              >
+                <p className="font-body text-ivory text-sm font-semibold">{tile.caption}</p>
+              </div>
+            </Reveal>
+          </Parallax>
         ))}
       </div>
     </main>

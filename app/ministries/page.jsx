@@ -1,5 +1,6 @@
 import { ministries } from "@/lib/content/ministries";
 import { Reveal } from "@/components/ui/Reveal";
+import { RevealText } from "@/components/ui/RevealText";
 
 export const metadata = {
   title: "Ministries | Jesus House Birmingham (Unofficial Concept)",
@@ -8,8 +9,8 @@ export const metadata = {
 export default function Ministries() {
   return (
     <main className="px-6 pt-32 pb-24 max-w-5xl mx-auto">
-      <Reveal>
-        <h1 className="font-display text-4xl mb-4">Ministries</h1>
+      <RevealText text="Ministries" tag="h1" className="font-display text-4xl mb-4" />
+      <Reveal delay={100}>
         <p className="font-body text-ink/80 max-w-2xl mb-12">
           Whether you&rsquo;re looking to deepen your faith, connect with others, or make a
           difference in the world, there&rsquo;s a place for you here.

@@ -3,6 +3,7 @@ import "./globals.css";
 import { SmoothScroll } from "@/components/providers/SmoothScroll";
 import { Nav } from "@/components/navigation/Nav";
 import { Footer } from "@/components/sections/Footer";
+import { ScrollProgress } from "@/components/ui/ScrollProgress";
 
 const fraunces = Fraunces({
   subsets: ["latin"],
@@ -27,6 +28,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${fraunces.variable} ${manrope.variable}`}>
       <body className="font-body bg-ivory text-ink antialiased">
+        <ScrollProgress />
         <SmoothScroll>
           <Nav />
           {children}
