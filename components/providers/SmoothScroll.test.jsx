@@ -7,7 +7,7 @@ vi.mock("lenis", () => ({
   default: vi.fn().mockImplementation(() => ({ raf, destroy, on: vi.fn() })),
 }));
 vi.mock("@/lib/gsap", () => ({
-  syncScrollTriggerWithLenis: vi.fn(),
+  syncScrollTriggerWithLenis: vi.fn().mockReturnValue(vi.fn()),
 }));
 
 import { SmoothScroll } from "./SmoothScroll";

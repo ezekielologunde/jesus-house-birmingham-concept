@@ -17,9 +17,10 @@ export function SmoothScroll({ children }) {
       touchMultiplier: 1.6,
     });
 
-    syncScrollTriggerWithLenis(lenis);
+    const removeTicker = syncScrollTriggerWithLenis(lenis);
 
     return () => {
+      removeTicker();
       lenis.destroy();
     };
   }, []);
