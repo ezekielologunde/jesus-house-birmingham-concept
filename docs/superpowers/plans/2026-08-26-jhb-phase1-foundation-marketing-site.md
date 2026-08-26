@@ -3000,7 +3000,7 @@ Expected: PASS.
 
 ```bash
 git add app/events/
-git commit -m "feat: add Events page with real recurring services and labeled example events"
+git commit -m "feat: add Events page with real recurring services and real annual programs"
 ```
 
 ---
