@@ -8,8 +8,8 @@ export const metadata = {
 };
 
 const FORM_FIELDS = [
-  { name: "name", required: true },
-  { name: "email", required: true },
+  { name: "name", label: "Name", required: true },
+  { name: "email", label: "Email", required: true },
 ];
 
 export default function Visit() {

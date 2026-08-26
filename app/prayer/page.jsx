@@ -6,8 +6,8 @@ export const metadata = {
 };
 
 const FORM_FIELDS = [
-  { name: "name", required: true },
-  { name: "request", required: true },
+  { name: "name", label: "Name", required: true },
+  { name: "request", label: "Prayer Request", required: true },
 ];
 
 export default function Prayer() {

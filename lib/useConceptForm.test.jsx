@@ -32,6 +32,26 @@ describe("useConceptForm", () => {
     expect(result.current.error).toMatch(/required/i);
   });
 
+  it("uses the field's human-readable label in the error message, not its raw field key", async () => {
+    const { result } = renderHook(() =>
+      useConceptForm({ fields: [{ name: "request", label: "Prayer Request", required: true }] })
+    );
+    await act(async () => {
+      result.current.handleSubmit(makeFormEvent({ request: "" }));
+    });
+    expect(result.current.error).toBe("Prayer Request is required.");
+  });
+
+  it("falls back to the raw field name when no label is given", async () => {
+    const { result } = renderHook(() =>
+      useConceptForm({ fields: [{ name: "email", required: true }] })
+    );
+    await act(async () => {
+      result.current.handleSubmit(makeFormEvent({ email: "" }));
+    });
+    expect(result.current.error).toBe("email is required.");
+  });
+
   it("moves through submitting to success without a network call, when required fields are filled", async () => {
     const { result } = renderHook(() =>
       useConceptForm({ fields: [{ name: "email", required: true }] })
