@@ -20,6 +20,7 @@ export const metadata = {
   title: "Jesus House Birmingham | Unofficial Redesign Concept",
   description:
     "An unofficial, motion-interactive redesign concept for Jesus House Birmingham (RCCG) — not affiliated with or endorsed by the church.",
+  robots: { index: false, follow: false },
 };
 
 export default function RootLayout({ children }) {

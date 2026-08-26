@@ -2,8 +2,7 @@ export default function robots() {
   return {
     rules: {
       userAgent: "*",
-      allow: "/",
+      disallow: "/",
     },
-    sitemap: "https://jesus-house-birmingham-concept.vercel.app/sitemap.xml",
   };
 }
