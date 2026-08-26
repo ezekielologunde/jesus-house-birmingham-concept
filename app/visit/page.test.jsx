@@ -9,6 +9,13 @@ describe("Visit page", () => {
     expect(screen.getByText("213 1st Avenue North, Birmingham, Alabama 35204")).toBeInTheDocument();
   });
 
+  it("numbers the service times 01 through 04", () => {
+    render(<Visit />);
+    expect(screen.getByText("01")).toBeInTheDocument();
+    expect(screen.getByText("04")).toBeInTheDocument();
+    expect(screen.getByText(/Sunday.*10:00 AM – 12:00 PM/)).toBeInTheDocument();
+  });
+
   it("has a plan-a-visit form with a name field", () => {
     render(<Visit />);
     expect(screen.getByLabelText("Name")).toBeInTheDocument();

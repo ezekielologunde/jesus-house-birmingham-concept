@@ -26,7 +26,7 @@ describe("Home page", () => {
   it("shows the real service times", () => {
     render(<Home />);
     expect(screen.getByText("Main Service")).toBeInTheDocument();
-    expect(screen.getAllByText("10:00 AM – 12:00 PM").length).toBeGreaterThan(0);
+    expect(screen.getAllByText(/10:00 AM – 12:00 PM/).length).toBeGreaterThan(0);
   });
 
   it("shows a ministries preview linking to the full ministries page", () => {

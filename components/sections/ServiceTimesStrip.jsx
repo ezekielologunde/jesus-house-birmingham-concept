@@ -1,23 +1,23 @@
 import { serviceTimes } from "@/lib/content/serviceTimes";
 import { Reveal } from "@/components/ui/Reveal";
 import { PinSection } from "@/components/ui/PinSection";
+import { NumberedList } from "@/components/ui/NumberedList";
+
+const SERVICE_TIME_ITEMS = serviceTimes.map((s) => ({
+  id: s.id,
+  title: s.label,
+  description: `${s.day} · ${s.time}`,
+}));
 
 export function ServiceTimesStrip() {
   return (
     <PinSection>
       <section className="bg-sky px-6 py-16 min-h-screen flex items-center">
-        <div className="mx-auto max-w-5xl grid gap-6 md:grid-cols-4">
-          {serviceTimes.map((s, i) => (
-            <Reveal
-              key={s.id}
-              delay={i * 80}
-              className="bg-white rounded-xl shadow-card hover:shadow-card-hover transition-shadow duration-300 p-5"
-            >
-              <p className="font-body text-xs uppercase tracking-wide text-royal">{s.day}</p>
-              <p className="font-display text-lg tracking-tight">{s.label}</p>
-              <p className="font-body text-sm text-ink/70">{s.time}</p>
-            </Reveal>
-          ))}
+        <div className="mx-auto max-w-3xl w-full">
+          <Reveal>
+            <h2 className="font-display text-3xl md:text-4xl tracking-tight mb-6">Service Times</h2>
+          </Reveal>
+          <NumberedList items={SERVICE_TIME_ITEMS} />
         </div>
       </section>
     </PinSection>

@@ -3,6 +3,7 @@ import { serviceTimes } from "@/lib/content/serviceTimes";
 import { Reveal } from "@/components/ui/Reveal";
 import { ConceptForm } from "@/components/ui/ConceptForm";
 import { FaqAccordion } from "@/components/ui/FaqAccordion";
+import { NumberedList } from "@/components/ui/NumberedList";
 
 export const metadata = {
   title: "Visit | Jesus House Birmingham (Unofficial Concept)",
@@ -18,6 +19,11 @@ export default function Visit() {
   const mainService = serviceTimes.find((s) => s.id === "main");
   const rhemaService = serviceTimes.find((s) => s.id === "rhema");
   const realSiteDomain = siteInfo.realSiteUrl.replace("https://www.", "").replace(/\/$/, "");
+  const serviceTimeItems = serviceTimes.map((s) => ({
+    id: s.id,
+    title: s.label,
+    description: `${s.day} · ${s.time}`,
+  }));
 
   const faqs = [
     {
@@ -57,19 +63,10 @@ export default function Visit() {
         </p>
       </Reveal>
 
-      <div className="grid gap-6 md:grid-cols-4 my-12">
-        {serviceTimes.map((s, i) => (
-          <Reveal
-            key={s.id}
-            delay={i * 80}
-            className="bg-white rounded-xl shadow-card hover:shadow-card-hover transition-shadow duration-300 p-5"
-          >
-            <p className="font-body text-xs uppercase tracking-wide text-royal">{s.day}</p>
-            <p className="font-display text-lg tracking-tight">{s.label}</p>
-            <p className="font-body text-sm text-ink/70">{s.time}</p>
-          </Reveal>
-        ))}
-      </div>
+      <Reveal delay={80} className="mb-16">
+        <h2 className="font-display text-2xl md:text-3xl tracking-tight mt-16 mb-2">Service Times</h2>
+        <NumberedList items={serviceTimeItems} />
+      </Reveal>
 
       <div className="grid gap-10 md:grid-cols-2">
         <Reveal>
