@@ -2,6 +2,7 @@ import { Fraunces, Manrope } from "next/font/google";
 import "./globals.css";
 import { SmoothScroll } from "@/components/providers/SmoothScroll";
 import { Nav } from "@/components/navigation/Nav";
+import { Footer } from "@/components/sections/Footer";
 
 const fraunces = Fraunces({
   subsets: ["latin"],
@@ -28,6 +29,7 @@ export default function RootLayout({ children }) {
         <SmoothScroll>
           <Nav />
           {children}
+          <Footer />
         </SmoothScroll>
       </body>
     </html>
