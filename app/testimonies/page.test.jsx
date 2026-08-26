@@ -6,6 +6,6 @@ describe("Testimonies page", () => {
   it("invites visitors to share, without showing any invented quotes", () => {
     render(<Testimonies />);
     expect(screen.getByText(/Share Your Testimony/i)).toBeInTheDocument();
-    expect(screen.queryByText(/"|"/)).not.toBeInTheDocument();
+    expect(screen.queryByText(/["""]/)).not.toBeInTheDocument();
   });
 });
