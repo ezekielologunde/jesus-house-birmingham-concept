@@ -27,9 +27,9 @@ export function VerseTicker() {
 
   return (
     <div className="overflow-hidden bg-sanctuary text-ivory py-4">
-      <div ref={trackRef} className="flex w-max gap-12 whitespace-nowrap font-display text-lg">
+      <div ref={trackRef} className="flex w-max whitespace-nowrap font-display text-lg">
         {Array.from({ length: REPEATS }).map((_, i) => (
-          <span key={i}>{verseLabel}</span>
+          <span key={i} className="pr-12">{verseLabel}</span>
         ))}
       </div>
     </div>
