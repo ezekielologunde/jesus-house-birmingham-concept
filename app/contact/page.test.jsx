@@ -25,4 +25,14 @@ describe("Contact page", () => {
     render(<Contact />);
     expect(screen.getByLabelText("Message")).toBeInTheDocument();
   });
+
+  it("embeds a map to the real address", () => {
+    render(<Contact />);
+    const map = screen.getByTitle("Map to Jesus House Birmingham");
+    expect(map.tagName).toBe("IFRAME");
+    expect(map).toHaveAttribute(
+      "src",
+      expect.stringContaining(encodeURIComponent("213 1st Avenue North, Birmingham, Alabama 35204"))
+    );
+  });
 });
