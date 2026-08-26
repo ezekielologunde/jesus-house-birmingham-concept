@@ -21,6 +21,8 @@
 - Real service times: Sunday Rhema Expression 9:00–9:50 AM, Sunday Main Service 10:00 AM–12:00 PM, Sunday French Service 12:30 PM, Wednesday Bible Study 6:00–7:30 PM.
 - Real leadership: Enefaa Fenny (Lead Pastor), Bola Fenny (Co-Pastor), Christy Iwuaba (Pastor); ministry leads Blessing Falola, Eke Ozurumba, Michael Falola, Georges Adunlin, Nseobong Okon, Ofonime Okon, Taiye Atilola.
 - Real RCCG parent-organization facts (JHB is a parish of RCCG, not standalone): founded 1952 by Pa Josiah Akindayomi; General Overseer Pastor E.A. Adeboye. Worldwide HQ: Redemption City of God (formerly Redemption Camp), Kilometer 46, Lagos–Ibadan Expressway, Mowe, Ogun State, Nigeria — 2,500+ hectare campus, opened 1983. North America HQ: 515 County Road 1118, Greenville, TX 75401, USA — 800-acre campus, 20,000-seat auditorium, hosts RCCG's annual North American convention.
+- Real RCCG universities and camp development: Redeemer's University (RUN) — full accredited university, founded 2005, Ede, Osun State, Nigeria, owned by RCCG. Redeemer's University North America (RUNA) — founded 2012 (originally RCCGNA Seminary), trains in Biblical studies, theology, and pastoral leadership. RCCG North America Camp Development — official project, 800+ acres in the Dallas–Fort Worth area (Floyd/Greenville, TX), modeled on Redemption Camp, with housing estates/a school/a university planned as it's built out; official site `campdevelopment.rccgna.org`.
+- **No land-buying or estate-purchase flow, ever.** Third-party speculative land listings near Redemption Camp Nigeria are not an RCCG program and are not referenced anywhere. The camp development's planned housing estate is informational text only, with a link to the church's own official site — same no-CTA-to-buy-anything pattern as Giving.
 - Real giving methods (photo-sourced from physical signage, 2026-08-26): Give Online → link to `https://www.jesushousebhm.org/giving`; Zelle → "The Redeemed Christian Church of God" at 205-586-9854; Text-to-Give → (833) 271-1840, text GIVE plus an amount; Cash/Check → ask for an envelope at service. No QR codes are generated for this build.
 - Ministries: **Kingdom Men** and **YAYA (Youths & Young Adults)** are real names sourced from internal ministry WhatsApp groups (2026-08-26) — only the names/rough facts are used, never any member's personal data from those chats. The rest remain placeholder/illustrative (no real list exists): Children's Church, Women's Fellowship, Media & Creative Arts, Ushering & Protocol, Prayer Band, Outreach & Missions, Choir/Worship Team.
 - Events: real recurring services (Sunday/Wednesday, from service times above) plus 2 real annual programs, same source: **Men's Week** (October) and **YAYA Week** (April) — these replace the earlier invented placeholder seasonal events.
@@ -1314,7 +1316,7 @@ git commit -m "feat: add UI-only form primitive (no backend delivery in Phase 1)
   - `ministries.js`: `ministries = [{ id, name, description }]`, plus `ministriesArePlaceholder = true`
   - `events.js`: `recurringEvents = [{ id, name, day, time }]`, `seasonalEvents = [{ id, name, dateLabel, description }]`, plus `seasonalEventsArePlaceholder = false` (these are real annual programs, not invented)
   - `giving.js`: `givingMethods = [{ id, name, detail, href }]` (`href` is `null` when there's nothing to link)
-  - `rccg.js`: `rccg = { foundedYear, founder, generalOverseer, worldwideHq: { name, address }, northAmericaHq: { address } }`
+  - `rccg.js`: `rccg = { foundedYear, founder, generalOverseer, worldwideHq: { name, address }, northAmericaHq: { address }, universities: [{ name, location, note }], campDevelopment: { note, url } }`
 
 - [ ] **Step 1: Write the failing test**
 
@@ -1419,6 +1421,19 @@ describe("rccg", () => {
     expect(rccg.generalOverseer).toBe("Pastor E.A. Adeboye");
     expect(rccg.worldwideHq.address).toContain("Mowe, Ogun State, Nigeria");
     expect(rccg.northAmericaHq.address).toContain("Greenville, TX");
+  });
+
+  it("has both real universities, Nigeria and North America", () => {
+    const run = rccg.universities.find((u) => u.name === "Redeemer's University");
+    expect(run.location).toBe("Ede, Osun State, Nigeria");
+
+    const runa = rccg.universities.find((u) => u.name === "Redeemer's University North America");
+    expect(runa.location).toContain("Texas");
+  });
+
+  it("describes the camp development's planned housing estate with a link, not a purchase flow", () => {
+    expect(rccg.campDevelopment.note.toLowerCase()).toContain("housing estate");
+    expect(rccg.campDevelopment.url).toBe("https://campdevelopment.rccgna.org");
   });
 });
 ```
@@ -1582,6 +1597,22 @@ export const rccg = {
   northAmericaHq: {
     address: "515 County Road 1118, Greenville, TX 75401, USA",
     note: "An 800-acre campus with a 20,000-seat auditorium that hosts RCCG's annual North American convention.",
+  },
+  universities: [
+    {
+      name: "Redeemer's University",
+      location: "Ede, Osun State, Nigeria",
+      note: "A full accredited university owned by RCCG, founded in 2005.",
+    },
+    {
+      name: "Redeemer's University North America",
+      location: "Greenville, Texas, USA",
+      note: "Founded in 2012 (originally the RCCGNA Seminary), training in Biblical studies, theology, and pastoral leadership.",
+    },
+  ],
+  campDevelopment: {
+    note: "RCCG North America is developing 800+ acres in the Dallas–Fort Worth area (Floyd/Greenville, TX), modeled on Nigeria's Redemption Camp — already home to the 20,000-seat convention auditorium, with a housing estate, a school, and a university planned as it's built out.",
+    url: "https://campdevelopment.rccgna.org",
   },
 };
 ```
@@ -2429,6 +2460,20 @@ describe("About page", () => {
     expect(screen.getByText(/Mowe, Ogun State, Nigeria/)).toBeInTheDocument();
     expect(screen.getByText(/Greenville, TX/)).toBeInTheDocument();
   });
+
+  it("shows both real RCCG universities", () => {
+    render(<About />);
+    expect(screen.getByText("Redeemer's University")).toBeInTheDocument();
+    expect(screen.getByText("Redeemer's University North America")).toBeInTheDocument();
+  });
+
+  it("describes the camp development's planned housing estate as informational, with a link and no purchase CTA", () => {
+    render(<About />);
+    expect(screen.getByText(/housing estate/)).toBeInTheDocument();
+    const link = screen.getByText("campdevelopment.rccgna.org");
+    expect(link.closest("a")).toHaveAttribute("href", "https://campdevelopment.rccgna.org");
+    expect(screen.queryByText(/buy|purchase/i)).not.toBeInTheDocument();
+  });
 });
 ```
 
@@ -2490,6 +2535,30 @@ export default function About() {
         <p className="font-body text-ink/80">
           RCCG's North America headquarters is at {rccg.northAmericaHq.address}.{" "}
           {rccg.northAmericaHq.note}
+        </p>
+      </Reveal>
+
+      <Reveal delay={80}>
+        <h2 className="font-display text-2xl mt-12 mb-3">Education</h2>
+        <div className="grid gap-6 md:grid-cols-2">
+          {rccg.universities.map((u) => (
+            <div key={u.name}>
+              <p className="font-display text-lg">{u.name}</p>
+              <p className="font-body text-sm text-sanctuary mb-1">{u.location}</p>
+              <p className="font-body text-sm text-ink/70">{u.note}</p>
+            </div>
+          ))}
+        </div>
+      </Reveal>
+
+      <Reveal delay={80}>
+        <h2 className="font-display text-2xl mt-12 mb-3">Camp Development</h2>
+        <p className="font-body text-ink/80">
+          {rccg.campDevelopment.note} Learn more at{" "}
+          <a href={rccg.campDevelopment.url} className="underline text-sanctuary">
+            campdevelopment.rccgna.org
+          </a>
+          .
         </p>
       </Reveal>
     </main>

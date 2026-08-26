@@ -86,6 +86,27 @@ America Headquarters: 515 County Road 1118, Greenville, TX 75401, USA — an
 800-acre campus with a 20,000-seat auditorium that hosts RCCG's annual North
 American convention.
 
+**RCCG universities and the North America camp development** (also pulled via
+web search on 2026-08-26, per the user's request): RCCG owns **Redeemer's
+University (RUN)**, a full accredited university founded in 2005 in Ede, Osun
+State, Nigeria. In North America, **Redeemer's University North America
+(RUNA)** — founded in 2012, originally as the RCCGNA Seminary — trains in
+Biblical studies, theology, and pastoral leadership. Separately, **RCCG North
+America Camp Development** is an active, official project on 800+ acres in
+the Dallas–Fort Worth area (Floyd/Greenville, TX) modeled on Nigeria's
+Redemption Camp; it already includes the 20,000-seat auditorium and hosts the
+annual convention, with housing estates, a school, and a university planned as
+it's built out (official info: `campdevelopment.rccgna.org`).
+
+**No land-buying/estate-purchase flow is built for this site.** The land
+listings that turn up near Redemption Camp in Nigeria are third-party
+speculative real estate listings (private sellers capitalizing on proximity to
+the camp), not an RCCG program — they are not referenced here at all. The one
+real, official "estate" fact — RCCG North America's planned housing estate as
+part of its camp development — is presented as informational text with a link
+to the church's own official site, the same pattern already used for Giving:
+no purchase flow, no CTA to buy anything, ever.
+
 **Gaps in the source site's public copy** (confirmed by fetching every relevant
 page): no ministries list, no events list, no giving-method detail, no
 leadership bios.
