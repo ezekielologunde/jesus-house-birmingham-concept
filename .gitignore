@@ -9,3 +9,5 @@ coverage/
 # per the design spec's privacy boundary — the raw files themselves must not
 # enter version control.
 WhatsApp*
+
+.vercel
