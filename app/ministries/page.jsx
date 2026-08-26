@@ -1,0 +1,29 @@
+import { ministries } from "@/lib/content/ministries";
+import { Reveal } from "@/components/ui/Reveal";
+
+export const metadata = {
+  title: "Ministries | Jesus House Birmingham (Unofficial Concept)",
+};
+
+export default function Ministries() {
+  return (
+    <main className="px-6 pt-32 pb-24 max-w-5xl mx-auto">
+      <Reveal>
+        <h1 className="font-display text-4xl mb-4">Ministries</h1>
+        <p className="font-body text-ink/80 max-w-2xl mb-12">
+          Whether you&rsquo;re looking to deepen your faith, connect with others, or make a
+          difference in the world, there&rsquo;s a place for you here.
+        </p>
+      </Reveal>
+
+      <div className="grid gap-8 md:grid-cols-3">
+        {ministries.map((m, i) => (
+          <Reveal key={m.id} delay={i * 60}>
+            <h2 className="font-display text-xl mb-2">{m.name}</h2>
+            <p className="font-body text-sm text-ink/70">{m.description}</p>
+          </Reveal>
+        ))}
+      </div>
+    </main>
+  );
+}
