@@ -5,7 +5,7 @@ export function Footer() {
     <footer className="bg-plum text-ivory">
       <div className="mx-auto max-w-6xl px-6 py-16 grid gap-10 md:grid-cols-3">
         <div>
-          <p className="font-display text-lg mb-2">Jesus House</p>
+          <p className="font-display text-lg mb-2">{siteInfo.name}</p>
           <p className="text-sm text-ivory/80">{siteInfo.tagline}</p>
         </div>
 
@@ -14,20 +14,20 @@ export function Footer() {
           <p>{siteInfo.phone}</p>
           <p>{siteInfo.email}</p>
           <div className="flex gap-4 mt-2">
-            <a href={siteInfo.facebook} className="underline">
+            <a href={siteInfo.facebook} className="underline" target="_blank" rel="noopener noreferrer">
               Facebook
             </a>
-            <a href={siteInfo.instagram} className="underline">
+            <a href={siteInfo.instagram} className="underline" target="_blank" rel="noopener noreferrer">
               Instagram
             </a>
           </div>
         </div>
 
-        <div className="text-xs text-ivory/60 leading-relaxed">
+        <div className="text-sm text-ivory/80 leading-relaxed">
           <p>
-            This is an unofficial redesign concept and is not affiliated with or endorsed by
-            Jesus House Birmingham. For the real, official site, visit{" "}
-            <a href={siteInfo.realSiteUrl} className="underline">
+            This is an <strong>unofficial redesign concept</strong> and is <strong>not affiliated with or endorsed by</strong>
+            {" "}Jesus House Birmingham. For the real, official site, visit{" "}
+            <a href={siteInfo.realSiteUrl} className="underline" target="_blank" rel="noopener noreferrer">
               jesushousebhm.org
             </a>
             .
