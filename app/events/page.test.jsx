@@ -13,4 +13,9 @@ describe("Events page", () => {
     expect(screen.getByText("Men's Week")).toBeInTheDocument();
     expect(screen.getByText("YAYA Week")).toBeInTheDocument();
   });
+
+  it("offers an Add to Calendar download for each annual program", () => {
+    render(<Events />);
+    expect(screen.getAllByText("Add to Calendar")).toHaveLength(2);
+  });
 });

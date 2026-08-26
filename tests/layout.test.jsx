@@ -39,4 +39,17 @@ describe("RootLayout renders the required disclaimer", () => {
     );
     expect(screen.getByText(/not affiliated with or endorsed by/i)).toBeInTheDocument();
   });
+
+  it("has a skip-to-content link pointing at the main content region", () => {
+    render(
+      <RootLayout>
+        <p>page content</p>
+      </RootLayout>
+    );
+    const skipLink = screen.getByText("Skip to main content");
+    expect(skipLink).toHaveAttribute("href", "#main-content");
+    expect(document.getElementById("main-content")).toContainElement(
+      screen.getByText("page content")
+    );
+  });
 });

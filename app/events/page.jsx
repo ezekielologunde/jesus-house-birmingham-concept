@@ -1,5 +1,6 @@
 import { recurringEvents, seasonalEvents } from "@/lib/content/events";
 import { Reveal } from "@/components/ui/Reveal";
+import { AddToCalendarButton } from "@/components/ui/AddToCalendarButton";
 
 export const metadata = {
   title: "Events | Jesus House Birmingham (Unofficial Concept)",
@@ -40,6 +41,7 @@ export default function Events() {
             <p className="font-display text-lg tracking-tight">{e.name}</p>
             <p className="font-body text-sm text-royal">{e.dateLabel}</p>
             <p className="font-body text-sm text-ink/70">{e.description}</p>
+            <AddToCalendarButton title={e.name} month={e.month} description={e.description} />
           </Reveal>
         ))}
       </div>

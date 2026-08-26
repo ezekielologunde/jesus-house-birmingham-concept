@@ -44,10 +44,16 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${anton.variable} ${manrope.variable}`}>
       <body className="font-body bg-ivory text-ink antialiased">
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:rounded-full focus:bg-royal focus:text-ivory focus:px-5 focus:py-3 focus:font-body focus:font-semibold focus:shadow-cta"
+        >
+          Skip to main content
+        </a>
         <ScrollProgress />
         <SmoothScroll>
           <Nav />
-          {children}
+          <div id="main-content">{children}</div>
           <Footer />
         </SmoothScroll>
       </body>
