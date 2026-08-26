@@ -12,6 +12,7 @@
 
 - JavaScript only — no TypeScript, no `.ts`/`.tsx` files.
 - Next.js App Router, no `src/` directory, import alias `@/*` maps to the project root.
+- **File extension convention:** any file containing JSX syntax is `.jsx`, never `.js` — this includes every `app/**/page.jsx`, `app/layout.jsx`, `app/not-found.jsx`, and every component file. `app/sitemap.js`, `app/robots.js`, and everything under `lib/` contain no JSX and stay `.js`. This isn't stylistic: Vite/esbuild (which Vitest uses) hardcodes `.js` to a non-JSX loader with no working per-project override, so a JSX-containing `.js` file fails every test that imports it. Next.js itself accepts `.jsx` for these special files exactly like `.js`, so there's no downstream cost.
 - GSAP + ScrollTrigger for scroll-driven set-pieces (hero choreography, pinned sections, staggered/scrubbed timelines); Framer Motion for component/state-driven interaction (menus, hover, mount/unmount); Lenis for smooth scroll, synced with ScrollTrigger.
 - No backend, no email service, no database in Phase 1. Contact/Prayer/Visit forms are UI-only: real validation and loading/success states, zero network delivery.
 - No reuse of Jesus House Birmingham's actual logo image or actual photography (confirmed to exist on their live site but deliberately excluded). Custom typographic wordmark + stock/placeholder photography only.
@@ -37,7 +38,7 @@
 
 **Files:**
 - Create: `package.json`, `next.config.mjs`, `jsconfig.json`, `postcss.config.mjs`
-- Create: `app/layout.js`, `app/page.js`, `app/globals.css`
+- Create: `app/layout.jsx`, `app/page.jsx`, `app/globals.css`
 - Create: `vitest.config.js`, `vitest.setup.js`, `tests/mocks/next-font-google.js`
 - Create: `tests/smoke.test.jsx`
 - Create: `.eslintrc.json`, `.gitignore`
@@ -173,7 +174,7 @@ Create `app/globals.css`:
 @import "tailwindcss";
 ```
 
-Create `app/layout.js` (minimal — Task 2 fills this out with real fonts/metadata/tokens):
+Create `app/layout.jsx` (minimal — Task 2 fills this out with real fonts/metadata/tokens):
 
 ```jsx
 import "./globals.css";
@@ -192,7 +193,7 @@ export default function RootLayout({ children }) {
 }
 ```
 
-Create `app/page.js` (minimal — Task 11/12 fills this out):
+Create `app/page.jsx` (minimal — Task 11/12 fills this out):
 
 ```jsx
 export default function Home() {
@@ -305,12 +306,12 @@ git commit -m "chore: scaffold Next.js + Tailwind 4 + Vitest toolchain"
 
 **Files:**
 - Modify: `app/globals.css`
-- Modify: `app/layout.js`
+- Modify: `app/layout.jsx`
 - Test: `tests/layout.test.js`
 
 **Interfaces:**
 - Consumes: nothing new.
-- Produces: Tailwind theme tokens usable as utility classes everywhere downstream — `bg-sanctuary`, `text-gold`, `bg-ivory`, `text-ink`, `bg-blush`, `bg-plum`, `font-display` (Fraunces), `font-body` (Manrope). Exported `metadata` object from `app/layout.js` with real `title`/`description`, consumed nowhere else directly but asserted by this task's test.
+- Produces: Tailwind theme tokens usable as utility classes everywhere downstream — `bg-sanctuary`, `text-gold`, `bg-ivory`, `text-ink`, `bg-blush`, `bg-plum`, `font-display` (Fraunces), `font-body` (Manrope). Exported `metadata` object from `app/layout.jsx` with real `title`/`description`, consumed nowhere else directly but asserted by this task's test.
 
 - [ ] **Step 1: Write the failing test**
 
@@ -318,7 +319,7 @@ Create `tests/layout.test.js`:
 
 ```js
 import { describe, it, expect } from "vitest";
-import { metadata } from "@/app/layout.js";
+import { metadata } from "@/app/layout.jsx";
 
 describe("root layout metadata", () => {
   it("has the real site title and an unofficial-concept description", () => {
@@ -363,7 +364,7 @@ body {
 }
 ```
 
-Replace `app/layout.js`:
+Replace `app/layout.jsx`:
 
 ```jsx
 import { Fraunces, Manrope } from "next/font/google";
@@ -406,7 +407,7 @@ Also run: `npm run dev`, open `http://localhost:3000`, confirm the page loads wi
 - [ ] **Step 5: Commit**
 
 ```bash
-git add app/globals.css app/layout.js tests/layout.test.js
+git add app/globals.css app/layout.jsx tests/layout.test.js
 git commit -m "feat: add design tokens (palette, fonts) and real layout metadata"
 ```
 
@@ -589,7 +590,7 @@ git commit -m "feat: add Reveal and Magnetic Framer Motion primitives"
 - Create: `lib/gsap.js`
 - Test: `components/providers/SmoothScroll.test.jsx`
 - Test: `lib/gsap.test.js`
-- Modify: `app/layout.js`
+- Modify: `app/layout.jsx`
 
 **Interfaces:**
 - Produces: `SmoothScroll({ children })` — mounts Lenis and drives its raf loop, respects `prefers-reduced-motion`. `getGsap()` from `lib/gsap.js` — returns `{ gsap, ScrollTrigger }` with `ScrollTrigger` registered exactly once, safe to call from any client component; `syncScrollTriggerWithLenis(lenis)` — wires a Lenis instance's `scroll` event to `ScrollTrigger.update` and adds `ScrollTrigger`'s ticker to the same rAF loop.
@@ -725,7 +726,7 @@ export function SmoothScroll({ children }) {
 }
 ```
 
-Modify `app/layout.js` — wrap `children` in `SmoothScroll`:
+Modify `app/layout.jsx` — wrap `children` in `SmoothScroll`:
 
 ```jsx
 import { Fraunces, Manrope } from "next/font/google";
@@ -771,7 +772,7 @@ Also run: `npm run dev`, confirm the homepage still loads with no console errors
 - [ ] **Step 5: Commit**
 
 ```bash
-git add lib/gsap.js components/providers/SmoothScroll.jsx lib/gsap.test.js components/providers/SmoothScroll.test.jsx app/layout.js
+git add lib/gsap.js components/providers/SmoothScroll.jsx lib/gsap.test.js components/providers/SmoothScroll.test.jsx app/layout.jsx
 git commit -m "feat: add Lenis smooth-scroll provider synced with GSAP ScrollTrigger"
 ```
 
@@ -1636,7 +1637,7 @@ git commit -m "feat: add content data modules as single source of truth for real
 **Files:**
 - Create: `components/navigation/Nav.jsx`
 - Test: `components/navigation/Nav.test.jsx`
-- Modify: `app/layout.js`
+- Modify: `app/layout.jsx`
 
 **Interfaces:**
 - Consumes: `siteInfo` (Task 7), `Magnetic` (Task 3).
@@ -1767,7 +1768,7 @@ export function Nav() {
 }
 ```
 
-Modify `app/layout.js` — render `Nav` inside `SmoothScroll`, before `children`:
+Modify `app/layout.jsx` — render `Nav` inside `SmoothScroll`, before `children`:
 
 ```jsx
 import { Fraunces, Manrope } from "next/font/google";
@@ -1815,7 +1816,7 @@ Expected: PASS — 12 tests passed (11 routes + wordmark).
 - [ ] **Step 5: Commit**
 
 ```bash
-git add components/navigation/Nav.jsx components/navigation/Nav.test.jsx app/layout.js
+git add components/navigation/Nav.jsx components/navigation/Nav.test.jsx app/layout.jsx
 git commit -m "feat: add site navigation with all 11 routes and a mobile menu"
 ```
 
@@ -1826,7 +1827,7 @@ git commit -m "feat: add site navigation with all 11 routes and a mobile menu"
 **Files:**
 - Create: `components/sections/Footer.jsx`
 - Test: `components/sections/Footer.test.jsx`
-- Modify: `app/layout.js`
+- Modify: `app/layout.jsx`
 
 **Interfaces:**
 - Consumes: `siteInfo` (Task 7).
@@ -1910,7 +1911,7 @@ export function Footer() {
 }
 ```
 
-Modify `app/layout.js` — render `Footer` after `children`:
+Modify `app/layout.jsx` — render `Footer` after `children`:
 
 ```jsx
 import { Fraunces, Manrope } from "next/font/google";
@@ -1962,7 +1963,7 @@ Also run: `npm run dev`, confirm the footer disclaimer renders on the homepage, 
 - [ ] **Step 5: Commit**
 
 ```bash
-git add components/sections/Footer.jsx components/sections/Footer.test.jsx app/layout.js
+git add components/sections/Footer.jsx components/sections/Footer.test.jsx app/layout.jsx
 git commit -m "feat: add footer with real contact info and required unofficial-concept disclaimer"
 ```
 
@@ -2223,7 +2224,7 @@ git commit -m "feat: add Home hero with mount-choreographed headline and CTAs"
 - Create: `components/sections/WelcomeMessage.jsx`
 - Create: `components/sections/MinistriesPreview.jsx`
 - Create: `components/sections/EventsPreview.jsx`
-- Modify: `app/page.js`
+- Modify: `app/page.jsx`
 - Test: `app/page.test.jsx`
 
 **Interfaces:**
@@ -2281,7 +2282,7 @@ describe("Home page", () => {
 - [ ] **Step 2: Run test to verify it fails**
 
 Run: `npm test -- app/page.test.jsx`
-Expected: FAIL — `app/page.js` is still the Task 1 placeholder with none of this content.
+Expected: FAIL — `app/page.jsx` is still the Task 1 placeholder with none of this content.
 
 - [ ] **Step 3: Implement**
 
@@ -2388,7 +2389,7 @@ export function EventsPreview() {
 }
 ```
 
-Replace `app/page.js`:
+Replace `app/page.jsx`:
 
 ```jsx
 import { Hero } from "@/components/sections/Hero";
@@ -2422,7 +2423,7 @@ Also run: `npm run dev`, open `http://localhost:3000`, scroll through the whole 
 - [ ] **Step 5: Commit**
 
 ```bash
-git add components/sections/ServiceTimesStrip.jsx components/sections/WelcomeMessage.jsx components/sections/MinistriesPreview.jsx components/sections/EventsPreview.jsx app/page.js app/page.test.jsx
+git add components/sections/ServiceTimesStrip.jsx components/sections/WelcomeMessage.jsx components/sections/MinistriesPreview.jsx components/sections/EventsPreview.jsx app/page.jsx app/page.test.jsx
 git commit -m "feat: assemble Home page from hero, verse ticker, and supporting sections"
 ```
 
@@ -2431,7 +2432,7 @@ git commit -m "feat: assemble Home page from hero, verse ticker, and supporting 
 ## Task 13: About page
 
 **Files:**
-- Create: `app/about/page.js`
+- Create: `app/about/page.jsx`
 - Test: `app/about/page.test.jsx`
 
 **Interfaces:**
@@ -2480,11 +2481,11 @@ describe("About page", () => {
 - [ ] **Step 2: Run test to verify it fails**
 
 Run: `npm test -- app/about/page.test.jsx`
-Expected: FAIL — `app/about/page.js` doesn't exist yet.
+Expected: FAIL — `app/about/page.jsx` doesn't exist yet.
 
 - [ ] **Step 3: Implement**
 
-Create `app/about/page.js`:
+Create `app/about/page.jsx`:
 
 ```jsx
 import { siteInfo } from "@/lib/content/siteInfo";
@@ -2583,7 +2584,7 @@ git commit -m "feat: add About page with vision, mission, and RCCG global-family
 ## Task 14: Leadership page
 
 **Files:**
-- Create: `app/leadership/page.js`
+- Create: `app/leadership/page.jsx`
 - Test: `app/leadership/page.test.jsx`
 
 **Interfaces:**
@@ -2618,11 +2619,11 @@ describe("Leadership page", () => {
 - [ ] **Step 2: Run test to verify it fails**
 
 Run: `npm test -- app/leadership/page.test.jsx`
-Expected: FAIL — `app/leadership/page.js` doesn't exist yet.
+Expected: FAIL — `app/leadership/page.jsx` doesn't exist yet.
 
 - [ ] **Step 3: Implement**
 
-Create `app/leadership/page.js`:
+Create `app/leadership/page.jsx`:
 
 ```jsx
 import { pastors, ministryLeads } from "@/lib/content/leadership";
@@ -2695,7 +2696,7 @@ git commit -m "feat: add Leadership page with real names/titles and monogram ava
 ## Task 15: Visit page
 
 **Files:**
-- Create: `app/visit/page.js`
+- Create: `app/visit/page.jsx`
 - Test: `app/visit/page.test.jsx`
 
 **Interfaces:**
@@ -2728,11 +2729,11 @@ describe("Visit page", () => {
 - [ ] **Step 2: Run test to verify it fails**
 
 Run: `npm test -- app/visit/page.test.jsx`
-Expected: FAIL — `app/visit/page.js` doesn't exist yet.
+Expected: FAIL — `app/visit/page.jsx` doesn't exist yet.
 
 - [ ] **Step 3: Implement**
 
-Create `app/visit/page.js`:
+Create `app/visit/page.jsx`:
 
 ```jsx
 import { siteInfo } from "@/lib/content/siteInfo";
@@ -2823,7 +2824,7 @@ git commit -m "feat: add Visit page with real service times, map, and plan-a-vis
 ## Task 16: Ministries page
 
 **Files:**
-- Create: `app/ministries/page.js`
+- Create: `app/ministries/page.jsx`
 - Test: `app/ministries/page.test.jsx`
 
 **Interfaces:**
@@ -2853,11 +2854,11 @@ describe("Ministries page", () => {
 - [ ] **Step 2: Run test to verify it fails**
 
 Run: `npm test -- app/ministries/page.test.jsx`
-Expected: FAIL — `app/ministries/page.js` doesn't exist yet.
+Expected: FAIL — `app/ministries/page.jsx` doesn't exist yet.
 
 - [ ] **Step 3: Implement**
 
-Create `app/ministries/page.js`:
+Create `app/ministries/page.jsx`:
 
 ```jsx
 import { ministries } from "@/lib/content/ministries";
@@ -2908,7 +2909,7 @@ git commit -m "feat: add Ministries page"
 ## Task 17: Events page
 
 **Files:**
-- Create: `app/events/page.js`
+- Create: `app/events/page.jsx`
 - Test: `app/events/page.test.jsx`
 
 **Interfaces:**
@@ -2941,11 +2942,11 @@ describe("Events page", () => {
 - [ ] **Step 2: Run test to verify it fails**
 
 Run: `npm test -- app/events/page.test.jsx`
-Expected: FAIL — `app/events/page.js` doesn't exist yet.
+Expected: FAIL — `app/events/page.jsx` doesn't exist yet.
 
 - [ ] **Step 3: Implement**
 
-Create `app/events/page.js`:
+Create `app/events/page.jsx`:
 
 ```jsx
 import { recurringEvents, seasonalEvents } from "@/lib/content/events";
@@ -3007,7 +3008,7 @@ git commit -m "feat: add Events page with real recurring services and labeled ex
 ## Task 18: Giving page
 
 **Files:**
-- Create: `app/giving/page.js`
+- Create: `app/giving/page.jsx`
 - Test: `app/giving/page.test.jsx`
 
 **Interfaces:**
@@ -3048,11 +3049,11 @@ describe("Giving page", () => {
 - [ ] **Step 2: Run test to verify it fails**
 
 Run: `npm test -- app/giving/page.test.jsx`
-Expected: FAIL — `app/giving/page.js` doesn't exist yet.
+Expected: FAIL — `app/giving/page.jsx` doesn't exist yet.
 
 - [ ] **Step 3: Implement**
 
-Create `app/giving/page.js`:
+Create `app/giving/page.jsx`:
 
 ```jsx
 import { givingMethods } from "@/lib/content/giving";
@@ -3120,7 +3121,7 @@ git commit -m "feat: add Giving page with real methods sourced from church signa
 ## Task 19: Gallery page
 
 **Files:**
-- Create: `app/gallery/page.js`
+- Create: `app/gallery/page.jsx`
 - Test: `app/gallery/page.test.jsx`
 
 **Interfaces:**
@@ -3150,11 +3151,11 @@ describe("Gallery page", () => {
 - [ ] **Step 2: Run test to verify it fails**
 
 Run: `npm test -- app/gallery/page.test.jsx`
-Expected: FAIL — `app/gallery/page.js` doesn't exist yet.
+Expected: FAIL — `app/gallery/page.jsx` doesn't exist yet.
 
 - [ ] **Step 3: Implement**
 
-Create `app/gallery/page.js`:
+Create `app/gallery/page.jsx`:
 
 ```jsx
 import { Reveal } from "@/components/ui/Reveal";
@@ -3225,7 +3226,7 @@ git commit -m "feat: add Gallery page with honest placeholder tiles (no real or 
 ## Task 20: Testimonies page
 
 **Files:**
-- Create: `app/testimonies/page.js`
+- Create: `app/testimonies/page.jsx`
 - Test: `app/testimonies/page.test.jsx`
 
 **Interfaces:**
@@ -3255,11 +3256,11 @@ describe("Testimonies page", () => {
 - [ ] **Step 2: Run test to verify it fails**
 
 Run: `npm test -- app/testimonies/page.test.jsx`
-Expected: FAIL — `app/testimonies/page.js` doesn't exist yet.
+Expected: FAIL — `app/testimonies/page.jsx` doesn't exist yet.
 
 - [ ] **Step 3: Implement**
 
-Create `app/testimonies/page.js`:
+Create `app/testimonies/page.jsx`:
 
 ```jsx
 import Link from "next/link";
@@ -3308,7 +3309,7 @@ git commit -m "feat: add Testimonies page as an invite-only CTA (no invented quo
 ## Task 21: Contact page
 
 **Files:**
-- Create: `app/contact/page.js`
+- Create: `app/contact/page.jsx`
 - Test: `app/contact/page.test.jsx`
 
 **Interfaces:**
@@ -3341,11 +3342,11 @@ describe("Contact page", () => {
 - [ ] **Step 2: Run test to verify it fails**
 
 Run: `npm test -- app/contact/page.test.jsx`
-Expected: FAIL — `app/contact/page.js` doesn't exist yet.
+Expected: FAIL — `app/contact/page.jsx` doesn't exist yet.
 
 - [ ] **Step 3: Implement**
 
-Create `app/contact/page.js`:
+Create `app/contact/page.jsx`:
 
 ```jsx
 import { siteInfo } from "@/lib/content/siteInfo";
@@ -3419,7 +3420,7 @@ git commit -m "feat: add Contact page with real info and UI-only contact form"
 ## Task 22: Prayer page
 
 **Files:**
-- Create: `app/prayer/page.js`
+- Create: `app/prayer/page.jsx`
 - Test: `app/prayer/page.test.jsx`
 
 **Interfaces:**
@@ -3451,11 +3452,11 @@ describe("Prayer page", () => {
 - [ ] **Step 2: Run test to verify it fails**
 
 Run: `npm test -- app/prayer/page.test.jsx`
-Expected: FAIL — `app/prayer/page.js` doesn't exist yet.
+Expected: FAIL — `app/prayer/page.jsx` doesn't exist yet.
 
 - [ ] **Step 3: Implement**
 
-Create `app/prayer/page.js`:
+Create `app/prayer/page.jsx`:
 
 ```jsx
 import { Reveal } from "@/components/ui/Reveal";
@@ -3524,7 +3525,7 @@ git commit -m "feat: add Prayer Requests page (UI-only, explicit no-delivery not
 **Files:**
 - Create: `app/sitemap.js`
 - Create: `app/robots.js`
-- Create: `app/not-found.js`
+- Create: `app/not-found.jsx`
 - Test: `app/sitemap.test.js`
 - Test: `app/not-found.test.jsx`
 
@@ -3584,7 +3585,7 @@ describe("Not found page", () => {
 - [ ] **Step 2: Run tests to verify they fail**
 
 Run: `npm test -- app/sitemap.test.js app/not-found.test.jsx`
-Expected: FAIL — `app/sitemap.js` and `app/not-found.js` don't exist yet.
+Expected: FAIL — `app/sitemap.js` and `app/not-found.jsx` don't exist yet.
 
 - [ ] **Step 3: Implement**
 
@@ -3629,7 +3630,7 @@ export default function robots() {
 }
 ```
 
-Create `app/not-found.js`:
+Create `app/not-found.jsx`:
 
 ```jsx
 import Link from "next/link";
@@ -3670,6 +3671,6 @@ Run: `npm run dev`, then manually visit every route in a browser — `/`, `/abou
 - [ ] **Step 5: Commit**
 
 ```bash
-git add app/sitemap.js app/robots.js app/not-found.js app/sitemap.test.js app/not-found.test.jsx
+git add app/sitemap.js app/robots.js app/not-found.jsx app/sitemap.test.js app/not-found.test.jsx
 git commit -m "feat: add sitemap/robots/404 routes and complete Phase 1 verification pass"
 ```
