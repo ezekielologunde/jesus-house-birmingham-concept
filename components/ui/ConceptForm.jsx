@@ -14,7 +14,7 @@ export function ConceptForm({ fields, submitLabel, successMessage, children }) {
   }
 
   return (
-    <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-4">
+    <form onSubmit={handleSubmit} method="dialog" noValidate className="flex flex-col gap-4">
       {children}
       {error ? (
         <p role="alert" className="text-sm text-sanctuary">
