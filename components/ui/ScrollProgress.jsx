@@ -7,21 +7,26 @@ export function ScrollProgress({ className }) {
   const barRef = useRef(null);
 
   useEffect(() => {
-    const { gsap, ScrollTrigger } = getGsap();
-    const ctx = gsap.context(() => {
-      gsap.to(barRef.current, {
-        scaleX: 1,
-        ease: "none",
-        scrollTrigger: {
-          trigger: document.documentElement,
-          start: "top top",
-          end: "bottom bottom",
-          scrub: true,
-        },
+    const { gsap } = getGsap();
+    const mm = gsap.matchMedia();
+
+    mm.add("(prefers-reduced-motion: no-preference)", () => {
+      const ctx = gsap.context(() => {
+        gsap.to(barRef.current, {
+          scaleX: 1,
+          ease: "none",
+          scrollTrigger: {
+            trigger: document.documentElement,
+            start: "top top",
+            end: "bottom bottom",
+            scrub: true,
+          },
+        });
       });
+      return () => ctx.revert();
     });
 
-    return () => ctx.revert();
+    return () => mm.revert();
   }, []);
 
   return (

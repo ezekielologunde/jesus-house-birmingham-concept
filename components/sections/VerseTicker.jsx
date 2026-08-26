@@ -11,16 +11,24 @@ export function VerseTicker() {
 
   useEffect(() => {
     const { gsap } = getGsap();
-    const ctx = gsap.context(() => {
-      gsap.to(trackRef.current, {
-        xPercent: -50,
-        duration: 22,
-        ease: "none",
-        repeat: -1,
-      });
-    }, trackRef);
+    const mm = gsap.matchMedia();
 
-    return () => ctx.revert();
+    // An infinite marquee is a WCAG 2.2.2 (Pause, Stop, Hide) concern for
+    // motion lasting longer than 5 seconds — skip it entirely under reduced
+    // motion rather than just slowing it down, so the verse just sits still.
+    mm.add("(prefers-reduced-motion: no-preference)", () => {
+      const ctx = gsap.context(() => {
+        gsap.to(trackRef.current, {
+          xPercent: -50,
+          duration: 22,
+          ease: "none",
+          repeat: -1,
+        });
+      }, trackRef);
+      return () => ctx.revert();
+    });
+
+    return () => mm.revert();
   }, []);
 
   const verseLabel = `${siteInfo.verse.text} — ${siteInfo.verse.reference}`;

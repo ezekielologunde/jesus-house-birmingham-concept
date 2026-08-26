@@ -17,15 +17,20 @@ export function Hero() {
 
   useLayoutEffect(() => {
     const { gsap } = getGsap();
-    const ctx = gsap.context(() => {
-      gsap
-        .timeline({ defaults: { ease: "power3.out", duration: 0.9 } })
-        .from("[data-hero-eyebrow]", { opacity: 0, y: 16 })
-        .from("[data-hero-word]", { opacity: 0, yPercent: 100, stagger: 0.06 }, "-=0.5")
-        .from("[data-hero-cta]", { opacity: 0, y: 12, stagger: 0.1 }, "-=0.4");
-    }, scope);
+    const mm = gsap.matchMedia();
 
-    return () => ctx.revert();
+    mm.add("(prefers-reduced-motion: no-preference)", () => {
+      const ctx = gsap.context(() => {
+        gsap
+          .timeline({ defaults: { ease: "power3.out", duration: 0.9 } })
+          .from("[data-hero-eyebrow]", { opacity: 0, y: 16 })
+          .from("[data-hero-word]", { opacity: 0, yPercent: 100, stagger: 0.06 }, "-=0.5")
+          .from("[data-hero-cta]", { opacity: 0, y: 12, stagger: 0.1 }, "-=0.4");
+      }, scope);
+      return () => ctx.revert();
+    });
+
+    return () => mm.revert();
   }, []);
 
   const words = siteInfo.tagline.split(" ");

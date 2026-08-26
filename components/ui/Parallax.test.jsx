@@ -9,6 +9,7 @@ vi.mock("@/lib/gsap", () => ({
         return { revert: vi.fn() };
       },
       to: vi.fn(),
+      matchMedia: () => ({ add: (query, fn) => fn(), revert: vi.fn() }),
     },
     ScrollTrigger: {},
   }),

@@ -8,17 +8,22 @@ export function PinSection({ children, className }) {
 
   useEffect(() => {
     const { gsap, ScrollTrigger } = getGsap();
-    const ctx = gsap.context(() => {
-      ScrollTrigger.create({
-        trigger: ref.current,
-        start: "top top",
-        end: "+=100%",
-        pin: true,
-        pinSpacing: true,
-      });
-    }, ref);
+    const mm = gsap.matchMedia();
 
-    return () => ctx.revert();
+    mm.add("(prefers-reduced-motion: no-preference)", () => {
+      const ctx = gsap.context(() => {
+        ScrollTrigger.create({
+          trigger: ref.current,
+          start: "top top",
+          end: "+=100%",
+          pin: true,
+          pinSpacing: true,
+        });
+      }, ref);
+      return () => ctx.revert();
+    });
+
+    return () => mm.revert();
   }, []);
 
   return (
