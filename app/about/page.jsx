@@ -13,8 +13,8 @@ export default function About() {
       <Reveal>
         <h1 className="font-display text-4xl md:text-5xl lg:text-6xl tracking-tight mb-6">About Jesus House Birmingham</h1>
         <p className="font-body text-ink/80 mb-4">
-          Jesus House Birmingham is a parish of The Redeemed Christian Church of God (RCCG) in
-          North America, and one of the parishes of RCCG worldwide.
+          Jesus House Birmingham is a parish of the Redeemed Christian Church of God in North
+          America, and one of the Redeemed Christian Church of God&apos;s parishes worldwide.
         </p>
         <Link href="/leadership" className="font-body text-royal underline inline-block py-1 -my-1">
           Meet our Leadership Team →
@@ -43,12 +43,13 @@ export default function About() {
       <Reveal delay={80}>
         <h2 className="font-display text-2xl md:text-3xl tracking-tight mt-12 mb-3">Part of a Global Family</h2>
         <p className="font-body text-ink/80 mb-4">
-          RCCG was founded in {rccg.foundedYear} by {rccg.founder} and is led today by{" "}
-          {rccg.generalOverseer}. The worldwide headquarters, {rccg.worldwideHq.name}, sits at{" "}
-          {rccg.worldwideHq.address}. {rccg.worldwideHq.note}
+          The Redeemed Christian Church of God was founded in {rccg.foundedYear} by {rccg.founder}{" "}
+          and is led today by {rccg.generalOverseer}. The worldwide headquarters,{" "}
+          {rccg.worldwideHq.name}, sits at {rccg.worldwideHq.address}. {rccg.worldwideHq.note}
         </p>
         <p className="font-body text-ink/80">
-          RCCG&apos;s North America headquarters is at {rccg.northAmericaHq.address}, led by
+          The Redeemed Christian Church of God&apos;s North America headquarters is at{" "}
+          {rccg.northAmericaHq.address}, led by
           Continental Overseer {rccg.northAmericaOverseer}. {rccg.northAmericaHq.note}
         </p>
       </Reveal>

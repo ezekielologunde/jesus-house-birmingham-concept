@@ -11,7 +11,9 @@ export function Footer() {
     <footer className="bg-midnight text-ivory">
       <div className="mx-auto max-w-6xl px-6 py-16 grid gap-10 md:grid-cols-4">
         <div>
-          <p className="font-body text-xs tracking-[0.25em] text-gold uppercase mb-1">RCCG</p>
+          <p className="font-body text-xs leading-tight tracking-[0.04em] text-gold uppercase mb-1 max-w-[14rem]">
+            Redeemed Christian Church of God
+          </p>
           <p className="font-display text-lg mb-2">{siteInfo.name}</p>
           <p className="text-sm text-ivory/80">{siteInfo.tagline}</p>
         </div>
