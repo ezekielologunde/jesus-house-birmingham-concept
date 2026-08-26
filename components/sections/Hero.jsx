@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useLayoutEffect } from "react";
+import { useRef, useLayoutEffect, useEffect } from "react";
 import Link from "next/link";
 import { useReducedMotion } from "framer-motion";
 import { getGsap } from "@/lib/gsap";
@@ -21,7 +21,19 @@ const HERO_VIDEO_POSTER = "/gallery/worship.jpg";
 
 export function Hero() {
   const scope = useRef(null);
+  const videoRef = useRef(null);
   const reduceMotion = useReducedMotion();
+
+  // Belt-and-suspenders for autoplay: the `autoPlay` attribute alone is
+  // ignored in some contexts (in-app browsers, power-saving modes) even
+  // when muted. Explicitly calling play() catches more of those cases; if
+  // the browser still blocks it, the poster frame stays visible instead.
+  useEffect(() => {
+    if (reduceMotion) return;
+    const video = videoRef.current;
+    if (!video) return;
+    video.play()?.catch(() => {});
+  }, [reduceMotion]);
 
   useLayoutEffect(() => {
     const { gsap } = getGsap();
@@ -46,7 +58,7 @@ export function Hero() {
   return (
     <section
       ref={scope}
-      className="relative min-h-screen flex flex-col justify-center px-6 pt-24 overflow-hidden"
+      className="relative min-h-[80vh] flex flex-col justify-end px-6 pt-24 pb-16 md:pb-24 overflow-hidden"
     >
       <div className="absolute inset-0">
         {reduceMotion ? (
@@ -54,6 +66,7 @@ export function Hero() {
           <img src={HERO_VIDEO_POSTER} alt="" className="w-full h-full object-cover" />
         ) : (
           <video
+            ref={videoRef}
             autoPlay
             muted
             loop

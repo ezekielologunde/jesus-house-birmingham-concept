@@ -33,3 +33,10 @@ if (!window.IntersectionObserver) {
     }
   };
 }
+
+// jsdom doesn't implement media playback — without this, every render of a
+// <video autoPlay> logs a noisy "not implemented" warning to stderr.
+if (window.HTMLMediaElement) {
+  window.HTMLMediaElement.prototype.play = () => Promise.resolve();
+  window.HTMLMediaElement.prototype.pause = () => {};
+}
