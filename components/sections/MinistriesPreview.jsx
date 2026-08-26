@@ -17,7 +17,7 @@ export function MinistriesPreview() {
             </Reveal>
           ))}
         </div>
-        <Link href="/ministries" className="inline-block mt-8 font-body underline text-sanctuary">
+        <Link href="/ministries" className="inline-block mt-8 font-body underline text-royal">
           See all ministries
         </Link>
       </div>

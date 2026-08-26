@@ -17,7 +17,7 @@ export default function Testimonies() {
         </p>
         <Link
           href="/contact"
-          className="inline-block rounded-full bg-sanctuary text-ivory px-6 py-3 font-body font-semibold"
+          className="inline-block rounded-full bg-royal text-ivory px-6 py-3 font-body font-semibold"
         >
           Get in Touch to Share Yours
         </Link>

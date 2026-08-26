@@ -30,7 +30,7 @@ export default function Events() {
         {seasonalEvents.map((e, i) => (
           <Reveal key={e.id} delay={i * 80}>
             <p className="font-display text-lg">{e.name}</p>
-            <p className="font-body text-sm text-sanctuary">{e.dateLabel}</p>
+            <p className="font-body text-sm text-royal">{e.dateLabel}</p>
             <p className="font-body text-sm text-ink/70">{e.description}</p>
           </Reveal>
         ))}

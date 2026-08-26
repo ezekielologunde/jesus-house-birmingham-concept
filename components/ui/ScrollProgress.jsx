@@ -29,7 +29,7 @@ export function ScrollProgress({ className }) {
       <div
         ref={barRef}
         data-testid="scroll-progress-bar"
-        className="h-full origin-left bg-sanctuary"
+        className="h-full origin-left bg-royal"
         style={{ transform: "scaleX(0)" }}
       />
     </div>

@@ -32,7 +32,7 @@ export function Hero() {
 
   return (
     <section ref={scope} className="min-h-screen flex flex-col justify-center px-6 pt-24">
-      <p data-hero-eyebrow className="font-body text-sm text-sanctuary mb-4">
+      <p data-hero-eyebrow className="font-body text-sm text-royal mb-4">
         &ldquo;{siteInfo.verse.text}.&rdquo; — {siteInfo.verse.reference}
       </p>
 
@@ -50,7 +50,7 @@ export function Hero() {
             <Magnetic strength={0.2}>
               <Link
                 href={cta.href}
-                className="inline-block rounded-full bg-sanctuary text-ivory px-6 py-3 font-body font-semibold"
+                className="inline-block rounded-full bg-royal text-ivory px-6 py-3 font-body font-semibold"
               >
                 {cta.label}
               </Link>

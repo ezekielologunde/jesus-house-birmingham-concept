@@ -55,7 +55,7 @@ export default function About() {
           {rccg.universities.map((u) => (
             <div key={u.name}>
               <p className="font-display text-lg">{u.name}</p>
-              <p className="font-body text-sm text-sanctuary mb-1">{u.location}</p>
+              <p className="font-body text-sm text-royal mb-1">{u.location}</p>
               <p className="font-body text-sm text-ink/70">{u.note}</p>
             </div>
           ))}
@@ -66,7 +66,7 @@ export default function About() {
         <h2 className="font-display text-2xl mt-12 mb-3">Camp Development</h2>
         <p className="font-body text-ink/80">
           {rccg.campDevelopment.note} Learn more at{" "}
-          <a href={rccg.campDevelopment.url} className="underline text-sanctuary">
+          <a href={rccg.campDevelopment.url} className="underline text-royal">
             campdevelopment.rccgna.org
           </a>
           .

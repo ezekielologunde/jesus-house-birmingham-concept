@@ -11,7 +11,7 @@ function Initials({ name }) {
     .map((n) => n[0])
     .join("");
   return (
-    <div className="w-16 h-16 rounded-full bg-sanctuary text-ivory flex items-center justify-center font-display text-xl">
+    <div className="w-16 h-16 rounded-full bg-royal text-ivory flex items-center justify-center font-display text-xl">
       {initials}
     </div>
   );
@@ -32,7 +32,7 @@ export default function Leadership() {
           <Reveal key={p.name} delay={i * 80} className="flex flex-col items-center text-center gap-3">
             <Initials name={p.name} />
             <p className="font-display text-lg">{p.name}</p>
-            <p className="font-body text-sm text-sanctuary">{p.title}</p>
+            <p className="font-body text-sm text-royal">{p.title}</p>
           </Reveal>
         ))}
       </div>

@@ -26,7 +26,7 @@ export function VerseTicker() {
   const verseLabel = `${siteInfo.verse.text} — ${siteInfo.verse.reference}`;
 
   return (
-    <div className="overflow-hidden bg-sanctuary text-ivory py-4">
+    <div className="overflow-hidden bg-royal text-ivory py-4">
       <div ref={trackRef} className="flex w-max whitespace-nowrap font-display text-lg">
         {Array.from({ length: REPEATS }).map((_, i) => (
           <span key={i} className="pr-12">{verseLabel}</span>

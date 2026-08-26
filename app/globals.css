@@ -1,12 +1,12 @@
 @import "tailwindcss";
 
 @theme {
-  --color-sanctuary: #8a1538;
-  --color-gold: #c6a15b;
-  --color-ivory: #fbf7f0;
-  --color-ink: #211a1d;
-  --color-blush: #f4e6e9;
-  --color-plum: #3b1220;
+  --color-royal: #2f5fff;
+  --color-gold: #ffc53d;
+  --color-ivory: #f8faff;
+  --color-ink: #0d1526;
+  --color-sky: #e7eeff;
+  --color-midnight: #060a14;
 
   --font-display: "Fraunces", ui-serif, Georgia, serif;
   --font-body: "Manrope", ui-sans-serif, system-ui, sans-serif;

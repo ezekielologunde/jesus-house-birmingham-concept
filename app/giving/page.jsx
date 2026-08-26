@@ -15,10 +15,10 @@ export default function Giving() {
           Your financial contribution means the world to us and helps us continue our mission of
           serving the community.
         </p>
-        <p className="font-body text-sm bg-blush rounded-lg px-4 py-3 text-ink/80">
+        <p className="font-body text-sm bg-sky rounded-lg px-4 py-3 text-ink/80">
           This is not an official giving channel — it reproduces the giving methods shown on the
           church&rsquo;s own signage for this concept build. Please confirm any gift through{" "}
-          <a href={siteInfo.realSiteUrl} className="underline text-sanctuary">
+          <a href={siteInfo.realSiteUrl} className="underline text-royal">
             {siteInfo.realSiteUrl.replace("https://www.", "").replace(/\/$/, "")}
           </a>{" "}
           directly.
@@ -30,7 +30,7 @@ export default function Giving() {
           <Reveal key={method.id} delay={i * 70}>
             <h2 className="font-display text-xl">
               {method.href ? (
-                <a href={method.href} className="text-sanctuary underline">
+                <a href={method.href} className="text-royal underline">
                   {method.name}
                 </a>
               ) : (

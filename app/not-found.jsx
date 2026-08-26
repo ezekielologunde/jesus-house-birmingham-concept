@@ -7,7 +7,7 @@ export default function NotFound() {
       <p className="font-body text-ink/70 mb-8">
         Let&rsquo;s get you back to somewhere real.
       </p>
-      <Link href="/" className="rounded-full bg-sanctuary text-ivory px-6 py-3 font-body font-semibold">
+      <Link href="/" className="rounded-full bg-royal text-ivory px-6 py-3 font-body font-semibold">
         Back to Home
       </Link>
     </main>

@@ -15,12 +15,12 @@ const TILES = [
 ];
 
 const GRADIENTS = [
-  "from-sanctuary to-plum",
-  "from-gold to-sanctuary",
-  "from-plum to-ink",
-  "from-blush to-gold",
-  "from-sanctuary to-gold",
-  "from-ink to-plum",
+  "from-royal to-midnight",
+  "from-gold to-royal",
+  "from-midnight to-ink",
+  "from-sky to-gold",
+  "from-royal to-gold",
+  "from-ink to-midnight",
 ];
 
 export default function Gallery() {

@@ -2,9 +2,10 @@ import { siteInfo } from "@/lib/content/siteInfo";
 
 export function Footer() {
   return (
-    <footer className="bg-plum text-ivory">
+    <footer className="bg-midnight text-ivory">
       <div className="mx-auto max-w-6xl px-6 py-16 grid gap-10 md:grid-cols-3">
         <div>
+          <p className="font-body text-xs tracking-[0.25em] text-gold uppercase mb-1">RCCG</p>
           <p className="font-display text-lg mb-2">{siteInfo.name}</p>
           <p className="text-sm text-ivory/80">{siteInfo.tagline}</p>
         </div>

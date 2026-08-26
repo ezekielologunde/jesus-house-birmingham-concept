@@ -6,7 +6,7 @@ export function EventsPreview() {
   const preview = recurringEvents.slice(0, 2);
 
   return (
-    <section className="px-6 py-20 bg-blush">
+    <section className="px-6 py-20 bg-sky">
       <div className="mx-auto max-w-5xl">
         <h2 className="font-display text-3xl mb-8">Upcoming</h2>
         <div className="grid gap-6 md:grid-cols-2">
@@ -17,7 +17,7 @@ export function EventsPreview() {
             </Reveal>
           ))}
         </div>
-        <Link href="/events" className="inline-block mt-8 font-body underline text-sanctuary">
+        <Link href="/events" className="inline-block mt-8 font-body underline text-royal">
           See all events
         </Link>
       </div>

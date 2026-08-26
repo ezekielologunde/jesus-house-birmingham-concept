@@ -18,7 +18,7 @@ export default function Prayer() {
         <p className="font-body text-ink/80 mb-2">
           We&rsquo;d be honored to stand with you in prayer.
         </p>
-        <p className="font-body text-sm bg-blush rounded-lg px-4 py-3 text-ink/80 mb-8">
+        <p className="font-body text-sm bg-sky rounded-lg px-4 py-3 text-ink/80 mb-8">
           This is a concept build — submitting this form does not reach the church. For a real
           prayer request, please contact Jesus House Birmingham directly.
         </p>
