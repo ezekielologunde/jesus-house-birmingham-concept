@@ -1,1 +1,22 @@
 @import "tailwindcss";
+
+@theme {
+  --color-sanctuary: #8a1538;
+  --color-gold: #c6a15b;
+  --color-ivory: #fbf7f0;
+  --color-ink: #211a1d;
+  --color-blush: #f4e6e9;
+  --color-plum: #3b1220;
+
+  --font-display: "Fraunces", ui-serif, Georgia, serif;
+  --font-body: "Manrope", ui-sans-serif, system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: auto;
+}
+
+body {
+  background-color: var(--color-ivory);
+  color: var(--color-ink);
+}
