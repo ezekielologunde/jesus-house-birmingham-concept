@@ -16,6 +16,11 @@ describe("About page", () => {
     expect(screen.getAllByText(/Greenville, TX/)).toHaveLength(2);
   });
 
+  it("shows the real North America Continental Overseer", () => {
+    render(<About />);
+    expect(screen.getByText(/Pastor James Fadel/)).toBeInTheDocument();
+  });
+
   it("shows both real RCCG universities", () => {
     render(<About />);
     expect(screen.getByText("Redeemer's University")).toBeInTheDocument();

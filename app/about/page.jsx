@@ -44,8 +44,8 @@ export default function About() {
           {rccg.worldwideHq.address}. {rccg.worldwideHq.note}
         </p>
         <p className="font-body text-ink/80">
-          RCCG&apos;s North America headquarters is at {rccg.northAmericaHq.address}.{" "}
-          {rccg.northAmericaHq.note}
+          RCCG&apos;s North America headquarters is at {rccg.northAmericaHq.address}, led by
+          Continental Overseer {rccg.northAmericaOverseer}. {rccg.northAmericaHq.note}
         </p>
       </Reveal>
 
