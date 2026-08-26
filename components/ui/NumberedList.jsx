@@ -11,11 +11,11 @@ export function NumberedList({ items }) {
             i > 0 ? "border-t border-ink/10" : ""
           }`}
         >
-          <span className="font-display font-black text-5xl md:text-6xl text-royal leading-none tabular-nums">
+          <span className="font-display text-6xl md:text-7xl text-royal leading-none tabular-nums">
             {String(i + 1).padStart(2, "0")}
           </span>
           <div>
-            <p className="font-display text-xl md:text-2xl tracking-tight mb-2">{item.title}</p>
+            <p className="font-display text-2xl md:text-3xl uppercase mb-2">{item.title}</p>
             <p className="font-body text-ink/70">{item.description}</p>
           </div>
         </Reveal>

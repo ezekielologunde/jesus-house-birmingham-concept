@@ -6,5 +6,5 @@ function mockFont() {
   };
 }
 
-export const Fraunces = mockFont;
+export const Anton = mockFont;
 export const Manrope = mockFont;

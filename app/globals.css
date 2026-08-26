@@ -1,23 +1,26 @@
 @import "tailwindcss";
 
 @theme {
-  --color-royal: #1e40c4;
+  /* "royal" is the site's primary accent token name — kept as-is rather than
+     renamed across ~20 files, but its value is now a burnt orange, not blue.
+     Chosen for contrast: 4.8:1+ on --color-ivory, 5.4:1+ on --color-sky. */
+  --color-royal: #a8380a;
   --color-gold: #ffc53d;
   --color-flame: #ff6a00;
-  --color-ivory: #f8faff;
-  --color-ink: #0d1526;
-  --color-sky: #e7eeff;
-  --color-midnight: #060a14;
+  --color-ivory: #fdf6ec;
+  --color-ink: #1c130a;
+  --color-sky: #ffe8d1;
+  --color-midnight: #150a04;
 
-  --font-display: "Fraunces", ui-serif, Georgia, serif;
+  --font-display: "Anton", ui-sans-serif, system-ui, sans-serif;
   --font-body: "Manrope", ui-sans-serif, system-ui, sans-serif;
 
   /* Layered, tinted shadows (ink for resting surfaces, royal/flame for CTAs) —
      two soft layers read as depth instead of a single hard drop shadow. */
-  --shadow-card: 0 1px 2px rgb(13 21 38 / 4%), 0 14px 28px rgb(13 21 38 / 8%);
-  --shadow-card-hover: 0 4px 10px rgb(13 21 38 / 6%), 0 22px 40px rgb(13 21 38 / 14%);
-  --shadow-cta: 0 2px 6px rgb(30 64 196 / 20%), 0 10px 24px rgb(30 64 196 / 35%);
-  --shadow-cta-hover: 0 3px 8px rgb(30 64 196 / 25%), 0 14px 32px rgb(30 64 196 / 42%);
+  --shadow-card: 0 1px 2px rgb(28 19 10 / 4%), 0 14px 28px rgb(28 19 10 / 8%);
+  --shadow-card-hover: 0 4px 10px rgb(28 19 10 / 6%), 0 22px 40px rgb(28 19 10 / 14%);
+  --shadow-cta: 0 2px 6px rgb(168 56 10 / 20%), 0 10px 24px rgb(168 56 10 / 35%);
+  --shadow-cta-hover: 0 3px 8px rgb(168 56 10 / 25%), 0 14px 32px rgb(168 56 10 / 42%);
   --shadow-flame: 0 2px 6px rgb(255 106 0 / 25%), 0 10px 26px rgb(255 106 0 / 40%);
   --shadow-flame-hover: 0 3px 8px rgb(255 106 0 / 30%), 0 14px 34px rgb(255 106 0 / 48%);
 }
