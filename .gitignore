@@ -2,6 +2,7 @@ node_modules/
 .next/
 .env*.local
 coverage/
+.claude/
 
 # Private source material (WhatsApp exports, personal photos) — never commit.
 # Only aggregate, non-personal facts extracted from these are used in the site,
