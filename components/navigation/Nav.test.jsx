@@ -1,20 +1,9 @@
 import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { Nav } from "./Nav";
+import { routes } from "@/lib/content/routes";
 
-const ROUTES = [
-  ["Home", "/"],
-  ["About", "/about"],
-  ["Leadership", "/leadership"],
-  ["Visit", "/visit"],
-  ["Ministries", "/ministries"],
-  ["Events", "/events"],
-  ["Giving", "/giving"],
-  ["Gallery", "/gallery"],
-  ["Testimonies", "/testimonies"],
-  ["Contact", "/contact"],
-  ["Prayer", "/prayer"],
-];
+const ROUTES = routes.map((r) => [r.label, `/${r.path}`]);
 
 describe("Nav", () => {
   it.each(ROUTES)("links to %s at %s", (label, href) => {

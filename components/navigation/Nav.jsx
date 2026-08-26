@@ -4,20 +4,9 @@ import { useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Magnetic } from "@/components/ui/Magnetic";
+import { routes } from "@/lib/content/routes";
 
-const LINKS = [
-  { label: "Home", href: "/" },
-  { label: "About", href: "/about" },
-  { label: "Leadership", href: "/leadership" },
-  { label: "Visit", href: "/visit" },
-  { label: "Ministries", href: "/ministries" },
-  { label: "Events", href: "/events" },
-  { label: "Giving", href: "/giving" },
-  { label: "Gallery", href: "/gallery" },
-  { label: "Testimonies", href: "/testimonies" },
-  { label: "Contact", href: "/contact" },
-  { label: "Prayer", href: "/prayer" },
-];
+const LINKS = routes.map((r) => ({ label: r.label, href: `/${r.path}` }));
 
 export function Nav() {
   const [open, setOpen] = useState(false);
