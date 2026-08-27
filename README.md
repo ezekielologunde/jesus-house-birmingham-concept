@@ -17,8 +17,8 @@ For the church's real, official site, visit
 - Real, publicly verifiable facts (service times, address, phone, real ministry
   names) reproduced accurately where sourced.
 - An **original** logo mark, **not** RCCG's/JHB's real logo.
-- **Open-license stock photography** on the Gallery page — not real photos of the
-  church or its congregation.
+- Real photos and hero video sourced from Jesus House Birmingham's own public
+  Facebook page.
 - Every form (contact, newsletter, prayer requests, giving, store checkout) is a
   **simulated submission** — nothing is delivered anywhere, no real backend exists.
 - A demo admin console (`/admin`) and demo store (`/store`) are UI-only concepts

@@ -18,15 +18,14 @@ vi.mock("@/lib/gsap", () => ({
 import Gallery from "./page";
 
 describe("Gallery page", () => {
-  it("shows stock photo tiles with captions, disclaiming real church photography", () => {
+  it("shows photo tiles with captions", () => {
     render(<Gallery />);
     expect(screen.getByText("Sunday Worship")).toBeInTheDocument();
-    expect(screen.getByText(/stock photo/i)).toBeInTheDocument();
-    expect(screen.getByText(/not actual photos of jesus house birmingham/i)).toBeInTheDocument();
+    expect(screen.getByText(/jesus house birmingham/i)).toBeInTheDocument();
   });
 
   it("renders an image for every tile", () => {
     render(<Gallery />);
-    expect(screen.getAllByRole("img")).toHaveLength(6);
+    expect(screen.getAllByRole("img")).toHaveLength(8);
   });
 });

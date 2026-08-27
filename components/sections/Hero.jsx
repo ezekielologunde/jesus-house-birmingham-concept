@@ -13,11 +13,10 @@ const CTAS = [
   { label: "Prayer Requests", href: "/prayer" },
 ];
 
-// Open-license (Pexels) stock worship video by Luis Quintero — not real
-// footage of Jesus House Birmingham. "Free to use" license, no attribution
-// required, credited here anyway. https://www.pexels.com/video/19087710/
+// Real footage from Jesus House Birmingham's own Facebook page (Thanksgiving
+// Service, Aug 2026 — praise & worship opening).
 const HERO_VIDEO_SRC = "/video/hero-worship.mp4";
-const HERO_VIDEO_POSTER = "/gallery/worship.jpg";
+const HERO_VIDEO_POSTER = "/video/hero-poster.jpg";
 
 export function Hero() {
   const scope = useRef(null);

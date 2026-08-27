@@ -53,7 +53,7 @@ describe("Hero", () => {
     expect(video).toHaveAttribute("autoplay");
     expect(video.muted).toBe(true);
     expect(video).toHaveAttribute("loop");
-    expect(video).toHaveAttribute("poster", "/gallery/worship.jpg");
+    expect(video).toHaveAttribute("poster", "/video/hero-poster.jpg");
     expect(container.querySelector("video source")).toHaveAttribute("src", "/video/hero-worship.mp4");
   });
 
@@ -61,6 +61,6 @@ describe("Hero", () => {
     useReducedMotion.mockReturnValue(true);
     const { container } = render(<Hero />);
     expect(container.querySelector("video")).not.toBeInTheDocument();
-    expect(container.querySelector("img")).toHaveAttribute("src", "/gallery/worship.jpg");
+    expect(container.querySelector("img")).toHaveAttribute("src", "/video/hero-poster.jpg");
   });
 });

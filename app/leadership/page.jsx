@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { pastors, ministryLeads } from "@/lib/content/leadership";
 import { Reveal } from "@/components/ui/Reveal";
 
@@ -6,52 +7,46 @@ export const metadata = {
   description: "Leadership team profiles for Jesus House Birmingham (unofficial concept).",
 };
 
-function Initials({ name }) {
-  const initials = name
-    .split(" ")
-    .map((n) => n[0])
-    .join("");
+function PersonCard({ name, title, photo }) {
   return (
-    <div className="w-16 h-16 rounded-full bg-royal text-ivory flex items-center justify-center font-display text-xl shadow-cta">
-      {initials}
+    <div className="bg-white rounded-2xl shadow-card hover:shadow-card-hover transition-shadow duration-300 overflow-hidden">
+      <div className="relative aspect-[4/5]">
+        <Image
+          src={photo}
+          alt={name}
+          fill
+          sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw"
+          className="object-cover"
+        />
+      </div>
+      <div className="p-5 text-center">
+        <p className="font-display text-xl tracking-tight">{name}</p>
+        {title && <p className="font-body text-sm text-royal mt-1">{title}</p>}
+      </div>
     </div>
   );
 }
 
 export default function Leadership() {
   return (
-    <main className="px-6 pt-32 pb-24 max-w-5xl mx-auto">
+    <main className="px-6 pt-32 pb-24 max-w-6xl mx-auto">
       <Reveal>
-        <h1 className="font-display text-4xl md:text-5xl lg:text-6xl tracking-tight mb-2">Leadership Team</h1>
-        <p className="font-body text-ink/70 mb-12">
-          No leadership photos exist for this concept build — shown with monogram avatars instead.
-        </p>
+        <h1 className="font-display text-4xl md:text-5xl lg:text-6xl tracking-tight mb-12">Leadership Team</h1>
       </Reveal>
 
-      <div className="grid gap-8 md:grid-cols-3 mb-16">
+      <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 mb-20">
         {pastors.map((p, i) => (
-          <Reveal
-            key={p.name}
-            delay={i * 80}
-            className="bg-white rounded-2xl shadow-card hover:shadow-card-hover transition-shadow duration-300 p-6 flex flex-col items-center text-center gap-3"
-          >
-            <Initials name={p.name} />
-            <p className="font-display text-lg tracking-tight">{p.name}</p>
-            <p className="font-body text-sm text-royal">{p.title}</p>
+          <Reveal key={p.name} delay={i * 80}>
+            <PersonCard {...p} />
           </Reveal>
         ))}
       </div>
 
-      <h2 className="font-display text-2xl md:text-3xl tracking-tight mb-6">Ministry Leads</h2>
-      <div className="grid gap-4 md:grid-cols-4">
+      <h2 className="font-display text-2xl md:text-3xl tracking-tight mb-8">Ministry Leads</h2>
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {ministryLeads.map((m, i) => (
-          <Reveal
-            key={m.name}
-            delay={i * 60}
-            className="bg-white rounded-xl shadow-card hover:shadow-card-hover transition-shadow duration-300 p-4 flex items-center gap-3"
-          >
-            <Initials name={m.name} />
-            <p className="font-body text-sm">{m.name}</p>
+          <Reveal key={m.name} delay={i * 60}>
+            <PersonCard {...m} />
           </Reveal>
         ))}
       </div>
