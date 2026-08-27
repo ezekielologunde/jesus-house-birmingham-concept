@@ -5,6 +5,7 @@ import { Reveal } from "@/components/ui/Reveal";
 
 export function WelcomeMessage() {
   const leadPastor = pastors.find((p) => p.title === "Lead Pastor") ?? pastors[0];
+  const coPastor = pastors.find((p) => p.title === "Co-Pastor");
 
   return (
     <section className="px-6 py-20">
@@ -13,7 +14,7 @@ export function WelcomeMessage() {
           <div className="relative aspect-[4/5] max-w-sm mx-auto md:mx-0 rounded-2xl overflow-hidden shadow-card">
             <Image
               src="/leadership/pastors-welcome.jpg"
-              alt={`${leadPastor.name} welcoming visitors to Jesus House Birmingham`}
+              alt={`${leadPastor.name} and ${coPastor.name} welcoming visitors to Jesus House Birmingham`}
               fill
               sizes="(min-width: 768px) 24rem, 80vw"
               className="object-cover"
@@ -25,7 +26,7 @@ export function WelcomeMessage() {
           <h2 className="font-display text-3xl md:text-4xl tracking-tight mb-4">Welcoming You Home</h2>
           <p className="font-body text-ink/80 leading-relaxed mb-4">{siteInfo.coreMessage}.</p>
           <p className="font-display text-lg text-royal">
-            — {leadPastor.name}, {leadPastor.title}
+            — Pastors {leadPastor.name.split(" ")[0]} &amp; {coPastor.name}
           </p>
         </Reveal>
       </div>

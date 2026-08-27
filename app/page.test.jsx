@@ -40,9 +40,9 @@ describe("Home page", () => {
     expect(screen.getByText("See all events").closest("a")).toHaveAttribute("href", "/events");
   });
 
-  it("welcomes visitors with the lead pastor's photo and the real vision statement", () => {
+  it("welcomes visitors with both pastors' photo and the real vision statement", () => {
     render(<Home />);
-    expect(screen.getByText(/Enefaa Fenny, Lead Pastor/)).toBeInTheDocument();
+    expect(screen.getByText(/Pastors Enefaa & Bola Fenny/)).toBeInTheDocument();
     expect(screen.getByText(/member of RCCG in every family of all nations/)).toBeInTheDocument();
   });
 });
