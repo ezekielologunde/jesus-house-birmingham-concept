@@ -2,6 +2,7 @@ import { describe, it, expect, afterEach } from "vitest";
 import { render, screen, fireEvent, within } from "@testing-library/react";
 import { Nav } from "./Nav";
 import { routes, primaryNavPaths, secondaryNavPaths } from "@/lib/content/routes";
+import { brandVariants } from "@/lib/content/branding";
 
 const PRIMARY_ROUTES = primaryNavPaths
   .map((path) => routes.find((r) => r.path === path))
@@ -31,9 +32,10 @@ describe("Nav", () => {
     }
   );
 
-  it("shows the real church name as the wordmark", () => {
+  it("shows one of the church's real name/logo variants as the wordmark", () => {
     render(<Nav />);
-    expect(screen.getAllByText("Jesus House").length).toBeGreaterThan(0);
+    const shown = brandVariants.some((v) => screen.queryAllByText(v.name).length > 0);
+    expect(shown).toBe(true);
   });
 
   describe("mobile slide-in menu", () => {

@@ -4,9 +4,10 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Search } from "lucide-react";
 import { Magnetic } from "@/components/ui/Magnetic";
-import { LogoMark } from "@/components/ui/LogoMark";
+import { BrandLogo } from "@/components/ui/BrandLogo";
 import { SearchModal } from "@/components/navigation/SearchModal";
 import { routes, primaryNavPaths } from "@/lib/content/routes";
+import { useBrandVariant } from "@/lib/useBrandVariant";
 
 const LINKS = primaryNavPaths
   .map((path) => routes.find((r) => r.path === path))
@@ -16,6 +17,7 @@ const LINKS = primaryNavPaths
 export function Nav() {
   const [open, setOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
+  const brand = useBrandVariant();
 
   useEffect(() => {
     if (!open) return undefined;
@@ -51,12 +53,14 @@ export function Nav() {
       <header className="fixed top-[var(--bar-h,0px)] left-0 right-0 z-40 bg-ivory/90 backdrop-blur border-b border-ink/10">
         <div className="mx-auto max-w-6xl flex items-center justify-between px-6 py-4">
           <Link href="/" className="flex items-center gap-2.5">
-            <LogoMark className="w-8 h-8 shrink-0" />
+            <BrandLogo logo={brand.logo} className="w-8 h-8" />
             <span className="flex flex-col leading-none">
               <span className="hidden lg:block font-body text-[0.65rem] leading-tight tracking-[0.03em] text-royal uppercase mb-1 max-w-[11rem]">
-                Redeemed Christian Church of God
+                {brand.motto}
               </span>
-              <span className="font-display text-2xl text-royal">Jesus House</span>
+              <span className="font-display text-2xl text-royal truncate max-w-[90px] lg:max-w-none">
+                {brand.name}
+              </span>
             </span>
           </Link>
 
@@ -130,8 +134,8 @@ export function Nav() {
 
         <div className="relative flex items-center justify-between px-6 py-5">
           <span className="flex items-center gap-2.5">
-            <LogoMark className="w-7 h-7 shrink-0" outer="text-white" inner="text-white/55" />
-            <span className="font-display text-xl text-white">Jesus House</span>
+            <BrandLogo logo={brand.logo} className="w-7 h-7" />
+            <span className="font-display text-lg text-white whitespace-nowrap">{brand.name}</span>
           </span>
           <button
             type="button"

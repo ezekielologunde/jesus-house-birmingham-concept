@@ -1,14 +1,16 @@
 "use client";
 
-import { buildMonthEventIcs } from "@/lib/ics";
+import { buildMonthEventIcs, buildDateEventIcs } from "@/lib/ics";
 
 function slugify(text) {
   return text.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
 }
 
-export function AddToCalendarButton({ title, month, description }) {
+export function AddToCalendarButton({ title, month, date, time, description }) {
   function handleClick() {
-    const ics = buildMonthEventIcs({ uid: slugify(title), title, month, description });
+    const ics = date
+      ? buildDateEventIcs({ uid: slugify(title), title, dateISO: date, time, description })
+      : buildMonthEventIcs({ uid: slugify(title), title, month, description });
     const blob = new Blob([ics], { type: "text/calendar;charset=utf-8" });
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");

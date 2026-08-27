@@ -14,8 +14,15 @@ describe("Events page", () => {
     expect(screen.getByText("YAYA Week")).toBeInTheDocument();
   });
 
-  it("offers an Add to Calendar download for each annual program", () => {
+  it("offers an Add to Calendar download for each annual program and upcoming event", () => {
     render(<Events />);
-    expect(screen.getAllByText("Add to Calendar")).toHaveLength(2);
+    expect(screen.getAllByText("Add to Calendar")).toHaveLength(3);
+  });
+
+  it("shows the real upcoming YAYA Storytelling Sunday with its date and theme", () => {
+    render(<Events />);
+    expect(screen.getByText("YAYA Storytelling Sunday")).toBeInTheDocument();
+    expect(screen.getByText(/August 30, 2026/)).toBeInTheDocument();
+    expect(screen.getByText(/My Journey, Your Hope/)).toBeInTheDocument();
   });
 });

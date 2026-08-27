@@ -1,4 +1,4 @@
-import { recurringEvents, seasonalEvents } from "@/lib/content/events";
+import { recurringEvents, seasonalEvents, upcomingEvents } from "@/lib/content/events";
 import { Reveal } from "@/components/ui/Reveal";
 import { AddToCalendarButton } from "@/components/ui/AddToCalendarButton";
 
@@ -13,6 +13,33 @@ export default function Events() {
       <Reveal>
         <h1 className="font-display text-4xl md:text-5xl lg:text-6xl tracking-tight mb-12">Events</h1>
       </Reveal>
+
+      {upcomingEvents.length > 0 && (
+        <>
+          <h2 className="font-display text-2xl md:text-3xl tracking-tight mb-6">Upcoming</h2>
+          <div className="grid gap-6 md:grid-cols-2 mb-16">
+            {upcomingEvents.map((e, i) => (
+              <Reveal
+                key={e.id}
+                delay={i * 80}
+                className="bg-white rounded-xl shadow-card hover:shadow-card-hover transition-shadow duration-300 p-5"
+              >
+                <p className="font-display text-lg tracking-tight">{e.name}</p>
+                <p className="font-body text-sm text-royal">{e.dateLabel}</p>
+                <p className="font-body text-sm text-ink/70 italic mt-1">&ldquo;{e.theme}&rdquo;</p>
+                <p className="font-body text-sm text-ink/70 mt-1">{e.description}</p>
+                <p className="font-body text-xs text-ink/50 mt-1">Dress code: {e.dressCode}</p>
+                <AddToCalendarButton
+                  title={e.name}
+                  date={e.date}
+                  time={e.time}
+                  description={e.description}
+                />
+              </Reveal>
+            ))}
+          </div>
+        </>
+      )}
 
       <h2 className="font-display text-2xl md:text-3xl tracking-tight mb-6">Every Week</h2>
       <div className="grid gap-6 md:grid-cols-4 mb-16">
