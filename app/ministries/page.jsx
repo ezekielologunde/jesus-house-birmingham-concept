@@ -1,4 +1,4 @@
-import { Baby, Users, Shield, Heart, Camera, DoorOpen, HeartHandshake, Globe, Music2 } from "lucide-react";
+import { Baby, Users, Shield, Heart, Camera, DoorOpen, HeartHandshake, ShoppingBasket, Handshake } from "lucide-react";
 import { ministries } from "@/lib/content/ministries";
 import { Reveal } from "@/components/ui/Reveal";
 import { RevealText } from "@/components/ui/RevealText";
@@ -9,11 +9,11 @@ const ICONS = {
   youth: Users,
   mens: Shield,
   womens: Heart,
-  media: Camera,
+  multimedia: Camera,
   ushering: DoorOpen,
-  "prayer-band": HeartHandshake,
-  outreach: Globe,
-  choir: Music2,
+  prayer: HeartHandshake,
+  "food-bank": ShoppingBasket,
+  welcome: Handshake,
 };
 
 export const metadata = {
