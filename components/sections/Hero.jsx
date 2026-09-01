@@ -81,13 +81,14 @@ export function Hero() {
         {/* This clip has burned-in song-lyric captions (not a track we can
             toggle off) that wander through the lower two-thirds of the
             frame — exactly where the eyebrow/heading/CTAs sit, since the
-            content is bottom-anchored (justify-end). A flat scrim wasn't
-            enough to bury bright caption text, so this is bottom-weighted:
-            fully opaque through the content zone (0–60% of the height,
-            measured from the bottom) so captions can't show through at
-            all there, fading to a lighter scrim above that so the video
-            still reads up top where nothing overlaps it. */}
-        <div className="absolute inset-0 bg-gradient-to-t from-ink from-0% via-ink via-60% to-ink/60" />
+            content is bottom-anchored (justify-end). Fully opaque there
+            (like an earlier pass of this) buried the captions but made the
+            whole hero read as a near-black block — this dials it back to
+            heavy-but-not-solid at the bottom (still enough to keep bright
+            caption text well under our own text in contrast) and much
+            lighter through the upper half, so the video is actually
+            visible again above where nothing overlaps it. */}
+        <div className="absolute inset-0 bg-gradient-to-t from-ink/90 from-0% via-ink/65 via-45% to-ink/25" />
       </div>
 
       <div className="relative w-full mx-auto max-w-6xl px-6">
