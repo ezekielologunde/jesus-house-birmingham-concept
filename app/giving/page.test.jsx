@@ -10,11 +10,11 @@ describe("Giving page", () => {
     expect(screen.getByText(/\(833\) 271-1840/)).toBeInTheDocument();
   });
 
-  it("links Give Online to the church's real giving page", () => {
+  it("links Give Online to the church's real OneChurch giving portal", () => {
     render(<Giving />);
     expect(screen.getByText("Give Online").closest("a")).toHaveAttribute(
       "href",
-      "https://www.jesushousebhm.org/giving"
+      "https://jesushousebhm.onechurchsoftware.com/public/give"
     );
   });
 
