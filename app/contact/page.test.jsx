@@ -1,5 +1,5 @@
-import { describe, it, expect } from "vitest";
-import { render, screen } from "@testing-library/react";
+import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import Contact from "./page";
 
 describe("Contact page", () => {
@@ -24,6 +24,36 @@ describe("Contact page", () => {
   it("has a contact form with a message field", () => {
     render(<Contact />);
     expect(screen.getByLabelText("Message")).toBeInTheDocument();
+  });
+
+  describe("submitting", () => {
+    beforeEach(() => {
+      vi.stubGlobal(
+        "fetch",
+        vi.fn(() => Promise.resolve({ ok: true, json: () => Promise.resolve({ ok: true }) }))
+      );
+    });
+
+    afterEach(() => {
+      vi.unstubAllGlobals();
+    });
+
+    it("submits real messages to /api/contact", async () => {
+      render(<Contact />);
+      fireEvent.change(screen.getByLabelText("Name"), { target: { value: "Ada" } });
+      fireEvent.change(screen.getByLabelText("Email"), { target: { value: "ada@example.com" } });
+      fireEvent.change(screen.getByLabelText("Message"), { target: { value: "Hello" } });
+      fireEvent.click(screen.getByRole("button", { name: "Send Message" }));
+
+      await waitFor(() => expect(fetch).toHaveBeenCalledTimes(1));
+      const [url, options] = fetch.mock.calls[0];
+      expect(url).toBe("/api/contact");
+      expect(JSON.parse(options.body)).toEqual({
+        name: "Ada",
+        email: "ada@example.com",
+        message: "Hello",
+      });
+    });
   });
 
   it("embeds a map to the real address", () => {

@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach } from "vitest";
+import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { AdminNav } from "./AdminNav";
 import { setAdminAuthed, isAdminAuthed } from "@/lib/adminAuth";
@@ -9,6 +9,11 @@ describe("AdminNav", () => {
     window.sessionStorage.clear();
     push.mockClear();
     mockPathname.current = "/admin/dashboard";
+    vi.stubGlobal("fetch", vi.fn(() => Promise.resolve({ ok: true })));
+  });
+
+  afterEach(() => {
+    vi.unstubAllGlobals();
   });
 
   it("renders links to every admin section", () => {

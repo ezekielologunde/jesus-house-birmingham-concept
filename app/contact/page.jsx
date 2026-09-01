@@ -57,8 +57,9 @@ export default function Contact() {
           <h2 className="font-display text-2xl md:text-3xl tracking-tight mb-3">Send a Message</h2>
           <ConceptForm
             fields={FORM_FIELDS}
+            endpoint="/api/contact"
             submitLabel="Send Message"
-            successMessage="Thanks — this is a demo, so nothing was actually sent to the church."
+            successMessage="Thank you — your message has been received."
           >
             <label className="flex flex-col gap-1 text-sm">
               Name

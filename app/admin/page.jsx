@@ -2,24 +2,42 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { ADMIN_DEMO_PASSWORD, isAdminAuthed, setAdminAuthed } from "@/lib/adminAuth";
+import { isAdminAuthed, setAdminAuthed } from "@/lib/adminAuth";
 
 export default function AdminLogin() {
   const router = useRouter();
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
+  const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
     if (isAdminAuthed()) router.replace("/admin/dashboard");
   }, [router]);
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
-    if (password === ADMIN_DEMO_PASSWORD) {
+    setError(null);
+    setSubmitting(true);
+
+    try {
+      const res = await fetch("/api/admin/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ password }),
+      });
+      const body = await res.json().catch(() => ({}));
+
+      if (!res.ok) {
+        setError(body.error || "Incorrect password.");
+        setSubmitting(false);
+        return;
+      }
+
       setAdminAuthed(true);
       router.push("/admin/dashboard");
-    } else {
-      setError("Incorrect password.");
+    } catch {
+      setError("Something went wrong. Please try again.");
+      setSubmitting(false);
     }
   }
 
@@ -27,8 +45,8 @@ export default function AdminLogin() {
     <main className="px-6 pt-10 pb-24 max-w-md mx-auto">
       <h1 className="font-display text-4xl md:text-5xl tracking-tight mb-2">Admin Login</h1>
       <p className="font-body text-sm text-ink/60 mb-8">
-        Demo console for this unofficial concept build — not a real authentication system.
-        Demo password: <code className="bg-ink/5 px-1 py-0.5 rounded">{ADMIN_DEMO_PASSWORD}</code>
+        Real, password-protected admin console for Jesus House Birmingham (unofficial concept
+        build — see the site footer). Not the church&rsquo;s own admin system.
       </p>
       <form onSubmit={handleSubmit} method="dialog" noValidate className="flex flex-col gap-3">
         <label className="flex flex-col gap-1 text-sm font-body">
@@ -48,9 +66,10 @@ export default function AdminLogin() {
         ) : null}
         <button
           type="submit"
-          className="self-start rounded-full bg-royal text-ivory px-6 py-3 font-body font-semibold shadow-cta hover:shadow-cta-hover transition-[box-shadow] duration-200"
+          disabled={submitting}
+          className="self-start rounded-full bg-royal text-ivory px-6 py-3 font-body font-semibold shadow-cta hover:shadow-cta-hover transition-[box-shadow] duration-200 disabled:opacity-60"
         >
-          Log In
+          {submitting ? "Logging in…" : "Log In"}
         </button>
       </form>
     </main>

@@ -21,6 +21,10 @@ export function AdminNav() {
   if (pathname === "/admin") return null;
 
   function handleLogout() {
+    // Fire-and-forget: clears the real httpOnly session cookie server-side.
+    // Not awaited — the client-side state below is what the UI (and
+    // middleware, on next request) actually depend on for the redirect.
+    fetch("/api/admin/login", { method: "DELETE" }).catch(() => {});
     setAdminAuthed(false);
     router.push("/admin");
   }

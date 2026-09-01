@@ -5,12 +5,12 @@ import { useConceptForm } from "@/lib/useConceptForm";
 const FIELDS = [{ name: "email", label: "Email", required: true }];
 
 export function NewsletterForm() {
-  const { status, error, handleSubmit } = useConceptForm({ fields: FIELDS });
+  const { status, error, handleSubmit } = useConceptForm({ fields: FIELDS, endpoint: "/api/newsletter" });
 
   if (status === "success") {
     return (
       <p role="status" className="text-sm text-gold font-medium">
-        Thanks — this is a demo, so nothing was actually sent.
+        Thanks — you&rsquo;re subscribed.
       </p>
     );
   }

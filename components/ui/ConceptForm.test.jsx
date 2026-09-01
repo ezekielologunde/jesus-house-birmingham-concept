@@ -1,44 +1,61 @@
-import { describe, it, expect, vi } from "vitest";
+import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { ConceptForm } from "./ConceptForm";
 
 describe("ConceptForm", () => {
-  it("shows the success message after a valid submit, with no real delivery", async () => {
-    render(
-      <ConceptForm
-        fields={[{ name: "email", required: true }]}
-        submitLabel="Send"
-        successMessage="Thanks — this is a demo, nothing was actually sent."
-      >
-        <input name="email" defaultValue="person@example.com" />
-      </ConceptForm>
-    );
-
-    fireEvent.click(screen.getByText("Send"));
-
-    await waitFor(() =>
-      expect(
-        screen.getByText("Thanks — this is a demo, nothing was actually sent.")
-      ).toBeInTheDocument()
+  beforeEach(() => {
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(() => Promise.resolve({ ok: true, json: () => Promise.resolve({ ok: true }) }))
     );
   });
 
-  it("makes no network request when submitted", async () => {
-    const fetchSpy = vi.spyOn(globalThis, "fetch");
+  afterEach(() => {
+    vi.unstubAllGlobals();
+  });
+
+  it("posts field values to the given endpoint and shows the success message", async () => {
     render(
       <ConceptForm
         fields={[{ name: "email", required: true }]}
+        endpoint="/api/example"
         submitLabel="Send"
-        successMessage="Sent"
+        successMessage="Thanks — received."
       >
         <input name="email" defaultValue="person@example.com" />
       </ConceptForm>
     );
 
     fireEvent.click(screen.getByText("Send"));
-    await waitFor(() => expect(screen.getByText("Sent")).toBeInTheDocument());
 
-    expect(fetchSpy).not.toHaveBeenCalled();
-    fetchSpy.mockRestore();
+    await waitFor(() => expect(fetch).toHaveBeenCalledTimes(1));
+    const [url, options] = fetch.mock.calls[0];
+    expect(url).toBe("/api/example");
+    expect(JSON.parse(options.body)).toEqual({ email: "person@example.com" });
+
+    await waitFor(() => expect(screen.getByText("Thanks — received.")).toBeInTheDocument());
+  });
+
+  it("shows the server's error message and doesn't advance to success when the request fails", async () => {
+    fetch.mockResolvedValueOnce({
+      ok: false,
+      json: () => Promise.resolve({ error: "Something went wrong." }),
+    });
+
+    render(
+      <ConceptForm
+        fields={[{ name: "email", required: true }]}
+        endpoint="/api/example"
+        submitLabel="Send"
+        successMessage="Thanks — received."
+      >
+        <input name="email" defaultValue="person@example.com" />
+      </ConceptForm>
+    );
+
+    fireEvent.click(screen.getByText("Send"));
+
+    await waitFor(() => expect(screen.getByText("Something went wrong.")).toBeInTheDocument());
+    expect(screen.queryByText("Thanks — received.")).not.toBeInTheDocument();
   });
 });

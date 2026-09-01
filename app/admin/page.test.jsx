@@ -1,7 +1,7 @@
-import { describe, it, expect, beforeEach } from "vitest";
-import { render, screen, fireEvent } from "@testing-library/react";
+import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import AdminLogin from "./page";
-import { ADMIN_DEMO_PASSWORD, isAdminAuthed, setAdminAuthed } from "@/lib/adminAuth";
+import { isAdminAuthed, setAdminAuthed } from "@/lib/adminAuth";
 import { push, replace } from "@/tests/mocks/next-navigation";
 
 describe("Admin login page", () => {
@@ -11,25 +11,41 @@ describe("Admin login page", () => {
     replace.mockClear();
   });
 
-  it("shows the demo password so the console is testable", () => {
-    render(<AdminLogin />);
-    expect(screen.getByText(ADMIN_DEMO_PASSWORD)).toBeInTheDocument();
+  afterEach(() => {
+    vi.unstubAllGlobals();
   });
 
-  it("rejects an incorrect password", () => {
+  it("rejects an incorrect password", async () => {
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(() =>
+        Promise.resolve({ ok: false, json: () => Promise.resolve({ error: "Incorrect password." }) })
+      )
+    );
     render(<AdminLogin />);
     fireEvent.change(screen.getByLabelText("Password"), { target: { value: "wrong" } });
     fireEvent.click(screen.getByText("Log In"));
-    expect(screen.getByText("Incorrect password.")).toBeInTheDocument();
+
+    await waitFor(() => expect(screen.getByText("Incorrect password.")).toBeInTheDocument());
     expect(isAdminAuthed()).toBe(false);
   });
 
-  it("accepts the demo password and redirects to the dashboard", () => {
+  it("posts the password to /api/admin/login and redirects to the dashboard on success", async () => {
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(() => Promise.resolve({ ok: true, json: () => Promise.resolve({ ok: true }) }))
+    );
     render(<AdminLogin />);
-    fireEvent.change(screen.getByLabelText("Password"), { target: { value: ADMIN_DEMO_PASSWORD } });
+    fireEvent.change(screen.getByLabelText("Password"), { target: { value: "correct-password" } });
     fireEvent.click(screen.getByText("Log In"));
+
+    await waitFor(() => expect(fetch).toHaveBeenCalledTimes(1));
+    const [url, options] = fetch.mock.calls[0];
+    expect(url).toBe("/api/admin/login");
+    expect(JSON.parse(options.body)).toEqual({ password: "correct-password" });
+
+    await waitFor(() => expect(push).toHaveBeenCalledWith("/admin/dashboard"));
     expect(isAdminAuthed()).toBe(true);
-    expect(push).toHaveBeenCalledWith("/admin/dashboard");
   });
 
   it("redirects straight to the dashboard when already authenticated", () => {

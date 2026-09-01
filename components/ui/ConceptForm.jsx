@@ -2,8 +2,8 @@
 
 import { useConceptForm } from "@/lib/useConceptForm";
 
-export function ConceptForm({ fields, submitLabel, successMessage, children }) {
-  const { status, error, handleSubmit } = useConceptForm({ fields });
+export function ConceptForm({ fields, endpoint, submitLabel, successMessage, children }) {
+  const { status, error, handleSubmit } = useConceptForm({ fields, endpoint });
 
   if (status === "success") {
     return (
