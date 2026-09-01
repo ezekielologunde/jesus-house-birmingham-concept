@@ -57,7 +57,7 @@ export function Hero() {
   return (
     <section
       ref={scope}
-      className="relative min-h-[80vh] flex flex-col justify-end px-6 pt-24 pb-16 md:pb-24 overflow-hidden"
+      className="relative min-h-[80vh] flex flex-col justify-end pt-32 pb-16 md:pb-24 overflow-hidden"
     >
       <div className="absolute inset-0">
         {reduceMotion ? (
@@ -78,13 +78,19 @@ export function Hero() {
             <source src={HERO_VIDEO_SRC} type="video/mp4" />
           </video>
         )}
-        {/* Flat, fairly opaque scrim (not a gradient) so text stays legible
-            regardless of how bright a given video frame gets — verified
-            against this clip's brightest (colored stage-light) moments. */}
-        <div className="absolute inset-0 bg-ink/80" />
+        {/* This clip has burned-in song-lyric captions (not a track we can
+            toggle off) that wander through the lower two-thirds of the
+            frame — exactly where the eyebrow/heading/CTAs sit, since the
+            content is bottom-anchored (justify-end). A flat scrim wasn't
+            enough to bury bright caption text, so this is bottom-weighted:
+            fully opaque through the content zone (0–60% of the height,
+            measured from the bottom) so captions can't show through at
+            all there, fading to a lighter scrim above that so the video
+            still reads up top where nothing overlaps it. */}
+        <div className="absolute inset-0 bg-gradient-to-t from-ink from-0% via-ink via-60% to-ink/60" />
       </div>
 
-      <div className="relative">
+      <div className="relative w-full mx-auto max-w-6xl px-6">
         <p data-hero-eyebrow className="font-body text-sm text-gold mb-4">
           &ldquo;{siteInfo.verse.text}.&rdquo; — {siteInfo.verse.reference}
         </p>

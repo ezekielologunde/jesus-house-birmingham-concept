@@ -51,24 +51,24 @@ export function Nav() {
   return (
     <>
       <header className="fixed top-[var(--bar-h,0px)] left-0 right-0 z-40 bg-ivory/90 backdrop-blur border-b border-ink/10">
-        <div className="mx-auto max-w-6xl flex items-center justify-between px-6 py-4">
-          <Link href="/" className="flex items-center gap-2.5">
-            <BrandLogo logo={brand.logo} className="w-8 h-8" />
+        <div className="mx-auto max-w-6xl flex items-center justify-between px-6 py-5">
+          <Link href="/" className="flex items-center gap-3">
+            <BrandLogo logo={brand.logo} className="w-11 h-11" />
             <span className="flex flex-col leading-none">
-              <span className="hidden lg:block font-body text-[0.65rem] leading-tight tracking-[0.03em] text-royal uppercase mb-1 max-w-[11rem]">
+              <span className="hidden lg:block font-body text-xs leading-tight tracking-[0.03em] text-royal uppercase mb-1 max-w-[13rem]">
                 {brand.motto}
               </span>
-              <span className="font-display text-2xl text-royal truncate max-w-[90px] lg:max-w-none">
+              <span className="font-display text-3xl lg:text-4xl text-royal truncate max-w-[220px] lg:max-w-[150px] xl:max-w-[320px]">
                 {brand.name}
               </span>
             </span>
           </Link>
 
-          <div className="flex items-center gap-1 md:gap-3">
-            <nav className="hidden md:flex items-center gap-6 mr-2">
+          <div className="flex items-center gap-1 lg:gap-4">
+            <nav className="hidden lg:flex items-center gap-8 mr-2">
               {LINKS.map((link) => (
                 <Magnetic key={link.href} strength={0.25}>
-                  <Link href={link.href} className="font-body text-sm text-ink hover:text-royal">
+                  <Link href={link.href} className="font-body text-base font-medium text-ink hover:text-royal">
                     {link.label}
                   </Link>
                 </Magnetic>
@@ -79,9 +79,9 @@ export function Nav() {
               type="button"
               onClick={() => setSearchOpen(true)}
               aria-label="Search"
-              className="p-2 rounded-full text-ink hover:bg-ink/5 transition-colors duration-200 flex items-center gap-1.5"
+              className="p-2.5 rounded-full text-ink hover:bg-ink/5 transition-colors duration-200 flex items-center gap-1.5"
             >
-              <Search size={18} strokeWidth={2} aria-hidden />
+              <Search size={22} strokeWidth={2} aria-hidden />
               <kbd className="hidden lg:inline-block font-body text-[10px] font-bold text-ink/40 bg-ink/5 border border-ink/10 rounded px-1.5 py-0.5">
                 ⌘K
               </kbd>
@@ -89,7 +89,7 @@ export function Nav() {
 
             <button
               type="button"
-              className="md:hidden font-body text-sm py-2 px-1"
+              className="lg:hidden font-body text-base font-semibold py-2 px-1"
               onClick={() => setOpen(true)}
               aria-expanded={open}
               aria-haspopup="dialog"
@@ -111,7 +111,7 @@ export function Nav() {
           animate-out-then-unmount approach never resolves under jsdom, which
           has no real compositor to signal animation completion. */}
       <div
-        className={`md:hidden fixed inset-0 z-40 bg-ink/40 backdrop-blur-sm transition-opacity duration-300 motion-reduce:transition-none ${
+        className={`lg:hidden fixed inset-0 z-40 bg-ink/40 backdrop-blur-sm transition-opacity duration-300 motion-reduce:transition-none ${
           open ? "opacity-100" : "opacity-0 pointer-events-none"
         }`}
         onClick={() => setOpen(false)}
@@ -121,7 +121,7 @@ export function Nav() {
         aria-modal="true"
         aria-label="Site menu"
         aria-hidden={!open}
-        className={`md:hidden fixed top-0 right-0 z-50 h-full w-full sm:w-[380px] flex flex-col bg-gradient-to-br from-flame to-gold overflow-y-auto transition-transform duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none ${
+        className={`lg:hidden fixed top-0 right-0 z-50 h-full w-full sm:w-[380px] flex flex-col bg-gradient-to-br from-flame to-gold overflow-y-auto transition-transform duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none ${
           open ? "translate-x-0" : "translate-x-full pointer-events-none"
         }`}
       >
@@ -134,8 +134,8 @@ export function Nav() {
 
         <div className="relative flex items-center justify-between px-6 py-5">
           <span className="flex items-center gap-2.5">
-            <BrandLogo logo={brand.logo} className="w-7 h-7" />
-            <span className="font-display text-lg text-white whitespace-nowrap">{brand.name}</span>
+            <BrandLogo logo={brand.logo} className="w-9 h-9" />
+            <span className="font-display text-xl text-white whitespace-nowrap">{brand.name}</span>
           </span>
           <button
             type="button"
