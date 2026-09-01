@@ -11,6 +11,7 @@ const LINKS = [
   { href: "/admin/gallery", label: "Gallery" },
   { href: "/admin/blog", label: "Blog" },
   { href: "/admin/prayer", label: "Prayer Requests" },
+  { href: "/admin/contact", label: "Messages" },
   { href: "/admin/newsletter", label: "Newsletter" },
 ];
 

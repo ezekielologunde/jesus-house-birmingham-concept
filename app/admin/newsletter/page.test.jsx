@@ -1,27 +1,42 @@
-import { describe, it, expect, beforeEach } from "vitest";
+import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import AdminNewsletter from "./page";
 import { setAdminAuthed } from "@/lib/adminAuth";
-import { demoNewsletterSubscribers } from "@/lib/adminData";
+
+const SUBSCRIBERS = [
+  { id: "1", email: "ada@example.com", created_at: "2026-08-01T00:00:00Z" },
+  { id: "2", email: "grace@example.com", created_at: "2026-08-02T00:00:00Z" },
+];
 
 describe("Admin newsletter page", () => {
   beforeEach(() => {
     window.sessionStorage.clear();
     setAdminAuthed(true);
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(() =>
+        Promise.resolve({ ok: true, json: () => Promise.resolve({ subscribers: SUBSCRIBERS }) })
+      )
+    );
   });
 
-  it("lists the demo subscribers", () => {
+  afterEach(() => {
+    vi.unstubAllGlobals();
+  });
+
+  it("lists real subscribers", async () => {
     render(<AdminNewsletter />);
-    demoNewsletterSubscribers.forEach((s) => {
-      expect(screen.getByText(new RegExp(s.email))).toBeInTheDocument();
-    });
+    await waitFor(() => expect(screen.getByText(/ada@example.com/)).toBeInTheDocument());
+    expect(screen.getByText(/grace@example.com/)).toBeInTheDocument();
   });
 
   it("simulates a broadcast send with no real network delivery", async () => {
     render(<AdminNewsletter />);
+    await waitFor(() => expect(screen.getByText(`Send to ${SUBSCRIBERS.length} subscribers`)).toBeInTheDocument());
+
     fireEvent.change(screen.getByLabelText("Subject"), { target: { value: "Test Subject" } });
     fireEvent.change(screen.getByLabelText("Body"), { target: { value: "Test body" } });
-    fireEvent.click(screen.getByText(`Send to ${demoNewsletterSubscribers.length} subscribers`));
+    fireEvent.click(screen.getByText(`Send to ${SUBSCRIBERS.length} subscribers`));
 
     await waitFor(() =>
       expect(
